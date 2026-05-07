@@ -144,3 +144,10 @@
   padding: 10px 12px;
   align-self: stretch;
 }
+
+/* ── Rounded variants (override size default) ── */
+.dsg-input-wrapper.dsg-input-wrapper--rounded-none { border-radius: 0; }
+.dsg-input-wrapper.dsg-input-wrapper--rounded-sm   { border-radius: var(--dsg-radius-sm); }
+.dsg-input-wrapper.dsg-input-wrapper--rounded-md   { border-radius: var(--dsg-radius); }
+.dsg-input-wrapper.dsg-input-wrapper--rounded-lg   { border-radius: var(--dsg-radius-lg); }
+.dsg-input-wrapper.dsg-input-wrapper--rounded-full { border-radius: var(--dsg-radius-full); }

@@ -1,0 +1,364 @@
+/* ============================================================
+   dsg-table — Data Table
+   ============================================================ */
+
+/* ── Outer wrapper ─────────────────────────────────────────── */
+
+.dsg-table-wrapper {
+  width: 100%;
+  font-family: var(--dsg-font);
+  color: var(--dsg-text);
+}
+
+.dsg-table-wrapper--outlined {
+  border: 1px solid var(--dsg-border);
+  border-radius: var(--dsg-radius-lg);
+  overflow: hidden;
+}
+
+/* ── Inner scroll container ────────────────────────────────── */
+
+.dsg-table-scroll {
+  overflow-x: auto;
+  /* creates a stacking context so sticky cells don't bleed through */
+  position: relative;
+}
+
+/* ── Table element ─────────────────────────────────────────── */
+
+.dsg-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: var(--dsg-table-body-bg, var(--dsg-bg));
+}
+
+.dsg-table--auto {
+  width: auto;
+}
+
+/* ── Caption ───────────────────────────────────────────────── */
+
+.dsg-table__caption {
+  caption-side: bottom;
+  padding: 8px 16px;
+  font-size: 12px;
+  color: var(--dsg-text-muted);
+  text-align: left;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+
+.dsg-table__th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-bottom: 1.5px solid var(--dsg-border);
+  background: var(--dsg-table-header-bg, var(--dsg-surface));
+  color: var(--dsg-table-header-color, var(--dsg-text-secondary));
+}
+
+.dsg-table--sticky .dsg-table__th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* ── Body ──────────────────────────────────────────────────── */
+
+.dsg-table__td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--dsg-border);
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.dsg-table tbody tr:last-child .dsg-table__td {
+  border-bottom: none;
+}
+
+/* ── Bordered ──────────────────────────────────────────────── */
+
+.dsg-table--bordered .dsg-table__th,
+.dsg-table--bordered .dsg-table__td {
+  border: 1px solid var(--dsg-border);
+}
+
+/* ── Striped ───────────────────────────────────────────────── */
+
+.dsg-table--striped tbody tr:nth-child(even) .dsg-table__td {
+  background: var(--dsg-surface);
+}
+
+/* ── Hoverable ─────────────────────────────────────────────── */
+
+.dsg-table--hoverable tbody tr {
+  transition: background var(--dsg-transition);
+}
+
+.dsg-table--hoverable tbody tr:hover .dsg-table__td {
+  background: var(--dsg-table-hover-bg, var(--dsg-primary-subtle));
+}
+
+/* ── Size — sm ─────────────────────────────────────────────── */
+
+.dsg-table--sm .dsg-table__th {
+  padding: 8px 12px;
+  font-size: 11px;
+}
+
+.dsg-table--sm .dsg-table__td {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+/* ── Size — lg ─────────────────────────────────────────────── */
+
+.dsg-table--lg .dsg-table__th {
+  padding: 14px 20px;
+}
+
+.dsg-table--lg .dsg-table__td {
+  padding: 14px 20px;
+  font-size: 15px;
+}
+
+/* ── Alignment ─────────────────────────────────────────────── */
+
+.dsg-table__th--center,
+.dsg-table__td--center {
+  text-align: center;
+}
+
+.dsg-table__th--right,
+.dsg-table__td--right {
+  text-align: right;
+}
+
+/* ── Sortable ──────────────────────────────────────────────── */
+
+.dsg-table__th--sortable {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.dsg-table__th--sortable:hover {
+  background: var(--dsg-surface-hover);
+  color: var(--dsg-text);
+}
+
+.dsg-table__th-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dsg-table__sort-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex-shrink: 0;
+}
+
+.dsg-table__sort-icon svg {
+  display: block;
+  width: 10px;
+  height: 6px;
+}
+
+.dsg-table__sort-arrow {
+  fill: var(--dsg-text-disabled);
+  transition: fill var(--dsg-transition);
+}
+
+.dsg-table__sort-arrow--active {
+  fill: var(--dsg-primary);
+}
+
+/* ── Fixed columns ─────────────────────────────────────────── */
+
+.dsg-table__th--fixed-left,
+.dsg-table__th--fixed-right {
+  position: sticky;
+  z-index: 3; /* above regular sticky headers */
+  background: var(--dsg-table-header-bg, var(--dsg-surface));
+}
+
+.dsg-table__td--fixed-left,
+.dsg-table__td--fixed-right {
+  position: sticky;
+  z-index: 1;
+  background: var(--dsg-table-body-bg, var(--dsg-bg));
+}
+
+/* Striped even rows — keep fixed cells in sync */
+.dsg-table--striped tbody tr:nth-child(even) .dsg-table__td--fixed-left,
+.dsg-table--striped tbody tr:nth-child(even) .dsg-table__td--fixed-right {
+  background: var(--dsg-surface);
+}
+
+/* Hoverable — fixed cells must also change on hover */
+.dsg-table--hoverable tbody tr:hover .dsg-table__td--fixed-left,
+.dsg-table--hoverable tbody tr:hover .dsg-table__td--fixed-right {
+  background: var(--dsg-table-hover-bg, var(--dsg-primary-subtle));
+}
+
+/* Shadow dividers */
+.dsg-table__cell--last-left {
+  box-shadow: inset -1px 0 0 var(--dsg-border), 6px 0 10px -4px rgba(0, 0, 0, 0.1);
+}
+
+.dsg-table__cell--first-right {
+  box-shadow: inset 1px 0 0 var(--dsg-border), -6px 0 10px -4px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Empty state ───────────────────────────────────────────── */
+
+.dsg-table__empty {
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--dsg-text-muted);
+  font-size: 14px;
+}
+
+/* ── Loading skeleton ──────────────────────────────────────── */
+
+@keyframes dsg-table-skeleton-pulse {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.35; }
+  100% { opacity: 1; }
+}
+
+.dsg-table__skeleton-cell {
+  display: block;
+  height: 14px;
+  border-radius: var(--dsg-radius-xs);
+  background: var(--dsg-surface-hover);
+  animation: dsg-table-skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+.dsg-table__skeleton-cell--short  { width: 45%; }
+.dsg-table__skeleton-cell--medium { width: 70%; }
+.dsg-table__skeleton-cell--long   { width: 90%; }
+
+/* ── Pagination ────────────────────────────────────────────── */
+
+.dsg-table-pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--dsg-border);
+  background: var(--dsg-table-body-bg, var(--dsg-bg));
+  flex-wrap: wrap;
+}
+
+.dsg-table-pagination__total {
+  font-size: 13px;
+  color: var(--dsg-text-muted);
+  margin-right: auto;
+}
+
+.dsg-table-pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.dsg-table-pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 6px;
+  border: 1px solid var(--dsg-border);
+  border-radius: var(--dsg-radius-sm);
+  background: var(--dsg-bg);
+  color: var(--dsg-text);
+  font-size: 13px;
+  font-family: var(--dsg-font);
+  cursor: pointer;
+  transition:
+    background var(--dsg-transition),
+    color var(--dsg-transition),
+    border-color var(--dsg-transition);
+  outline: none;
+  line-height: 1;
+}
+
+.dsg-table-pagination__btn:hover:not(:disabled) {
+  background: var(--dsg-surface);
+  border-color: var(--dsg-primary);
+  color: var(--dsg-primary);
+}
+
+.dsg-table-pagination__btn--active {
+  background: var(--dsg-primary);
+  border-color: var(--dsg-primary);
+  color: var(--dsg-text-on-primary);
+  font-weight: 500;
+}
+
+.dsg-table-pagination__btn--active:hover:not(:disabled) {
+  background: var(--dsg-primary-hover);
+  border-color: var(--dsg-primary-hover);
+  color: var(--dsg-text-on-primary);
+}
+
+.dsg-table-pagination__btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.dsg-table-pagination__btn:focus-visible {
+  box-shadow: 0 0 0 3px var(--dsg-primary-subtle);
+}
+
+.dsg-table-pagination__ellipsis {
+  min-width: 28px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--dsg-text-muted);
+  letter-spacing: 0.05em;
+}
+
+.dsg-table-pagination__size-select {
+  height: 32px;
+  padding: 0 28px 0 8px;
+  border: 1px solid var(--dsg-border);
+  border-radius: var(--dsg-radius-sm);
+  background: var(--dsg-bg);
+  color: var(--dsg-text);
+  font-size: 13px;
+  font-family: var(--dsg-font);
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--dsg-transition);
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%2371717a' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+.dsg-table-pagination__size-select:hover,
+.dsg-table-pagination__size-select:focus {
+  border-color: var(--dsg-primary);
+}
+
+/* ── Rounded variants ── */
+.dsg-table-wrapper.dsg-table-wrapper--rounded-none { border-radius: 0; overflow: hidden; }
+.dsg-table-wrapper.dsg-table-wrapper--rounded-sm   { border-radius: var(--dsg-radius-sm); overflow: hidden; }
+.dsg-table-wrapper.dsg-table-wrapper--rounded-md   { border-radius: var(--dsg-radius); overflow: hidden; }
+.dsg-table-wrapper.dsg-table-wrapper--rounded-lg   { border-radius: var(--dsg-radius-lg); overflow: hidden; }
+.dsg-table-wrapper.dsg-table-wrapper--rounded-full { border-radius: var(--dsg-radius-full); overflow: hidden; }

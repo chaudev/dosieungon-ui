@@ -142,3 +142,10 @@
   color: var(--dsg-success);
   border-color: var(--dsg-success);
 }
+
+/* ── Rounded variants (override default pill shape) ── */
+.dsg-chip.dsg-chip--rounded-none { border-radius: 0; }
+.dsg-chip.dsg-chip--rounded-sm   { border-radius: var(--dsg-radius-sm); }
+.dsg-chip.dsg-chip--rounded-md   { border-radius: var(--dsg-radius); }
+.dsg-chip.dsg-chip--rounded-lg   { border-radius: var(--dsg-radius-lg); }
+.dsg-chip.dsg-chip--rounded-full { border-radius: var(--dsg-radius-full); }

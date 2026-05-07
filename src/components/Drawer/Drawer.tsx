@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import '../../styles/variables.css';
 import './Drawer.css';
 import { cn } from '../../utils/cn';
+import type { Rounded } from '../../utils/types';
 
 export type DrawerPlacement = 'left' | 'right' | 'top' | 'bottom';
 export type DrawerSize = 'sm' | 'md' | 'lg' | 'full';
@@ -16,6 +17,8 @@ export interface DrawerProps {
   hideCloseButton?: boolean;
   closeOnBackdrop?: boolean;
   closeOnEscape?: boolean;
+  /** Border-radius preset for the drawer panel */
+  rounded?: Rounded;
   className?: string;
   bodyClassName?: string;
   footer?: ReactNode;
@@ -27,6 +30,7 @@ export const Drawer: React.FC<DrawerProps> = ({
   onClose,
   placement = 'right',
   size = 'md',
+  rounded,
   title,
   hideCloseButton = false,
   closeOnBackdrop = true,
@@ -93,6 +97,7 @@ export const Drawer: React.FC<DrawerProps> = ({
           `dsg-drawer--${placement}`,
           `dsg-drawer--${size}`,
           visible && 'dsg-drawer--visible',
+          rounded && `dsg-drawer--rounded-${rounded}`,
           className
         )}
         role="dialog"

@@ -121,3 +121,10 @@
   width: 22px;
   transform: translateX(20px);
 }
+
+/* ── Rounded variants for the track ── */
+.dsg-switch.dsg-switch--rounded-none .dsg-switch__track { border-radius: 0; }
+.dsg-switch.dsg-switch--rounded-sm   .dsg-switch__track { border-radius: var(--dsg-radius-sm); }
+.dsg-switch.dsg-switch--rounded-md   .dsg-switch__track { border-radius: var(--dsg-radius); }
+.dsg-switch.dsg-switch--rounded-lg   .dsg-switch__track { border-radius: var(--dsg-radius-lg); }
+.dsg-switch.dsg-switch--rounded-full .dsg-switch__track { border-radius: var(--dsg-radius-full); }

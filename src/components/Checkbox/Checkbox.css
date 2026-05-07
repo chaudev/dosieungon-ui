@@ -87,3 +87,10 @@
   width: 22px;
   height: 22px;
 }
+
+/* ── Rounded variants for the indicator box ── */
+.dsg-checkbox.dsg-checkbox--rounded-none .dsg-checkbox__indicator { border-radius: 0; }
+.dsg-checkbox.dsg-checkbox--rounded-sm   .dsg-checkbox__indicator { border-radius: var(--dsg-radius-xs); }
+.dsg-checkbox.dsg-checkbox--rounded-md   .dsg-checkbox__indicator { border-radius: var(--dsg-radius-sm); }
+.dsg-checkbox.dsg-checkbox--rounded-lg   .dsg-checkbox__indicator { border-radius: var(--dsg-radius); }
+.dsg-checkbox.dsg-checkbox--rounded-full .dsg-checkbox__indicator { border-radius: var(--dsg-radius-full); }

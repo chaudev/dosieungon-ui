@@ -344,3 +344,10 @@
   font-size: 15px;
   border-radius: var(--dsg-radius-lg);
 }
+
+/* ── Rounded variants for trigger (override size default) ── */
+.dsg-select__trigger.dsg-select__trigger--rounded-none { border-radius: 0; }
+.dsg-select__trigger.dsg-select__trigger--rounded-sm   { border-radius: var(--dsg-radius-sm); }
+.dsg-select__trigger.dsg-select__trigger--rounded-md   { border-radius: var(--dsg-radius); }
+.dsg-select__trigger.dsg-select__trigger--rounded-lg   { border-radius: var(--dsg-radius-lg); }
+.dsg-select__trigger.dsg-select__trigger--rounded-full { border-radius: var(--dsg-radius-full); }

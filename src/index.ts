@@ -1,5 +1,9 @@
+// Shared types
+export type { Rounded } from './utils/types';
+
 // Components
 export { Button } from './components/Button';
+export { Table } from './components/Table';
 export { Modal } from './components/Modal';
 export { Select } from './components/Select';
 export { Input } from './components/Input';
@@ -27,3 +31,4 @@ export type { RadioProps, RadioGroupProps } from './components/Radio';
 export type { CheckboxProps, CheckboxSize } from './components/Checkbox';
 export type { SwitchProps, SwitchSize } from './components/Switch';
 export type { DrawerProps, DrawerPlacement, DrawerSize } from './components/Drawer';
+export type { TableProps, TableColumn, TableSortDir, TablePaginationConfig } from './components/Table';

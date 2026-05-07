@@ -8,6 +8,7 @@ import React, {
   MouseEvent,
 } from 'react';
 import '../../styles/variables.css';
+import type { Rounded } from '../../utils/types';
 import './Select.css';
 import { cn } from '../../utils/cn';
 
@@ -63,6 +64,8 @@ export interface SelectProps {
   hint?: string;
   /** Size preset */
   size?: SelectSize;
+  /** Border-radius preset for the trigger button */
+  rounded?: Rounded;
   /** Additional class on the root element */
   className?: string;
   /** Empty state message */
@@ -84,6 +87,7 @@ export const Select: React.FC<SelectProps> = ({
   error,
   hint,
   size = 'md',
+  rounded,
   className,
   emptyText = 'No options found',
 }) => {
@@ -275,7 +279,7 @@ export const Select: React.FC<SelectProps> = ({
       <button
         ref={triggerRef}
         type="button"
-        className="dsg-select__trigger"
+        className={cn('dsg-select__trigger', rounded && `dsg-select__trigger--rounded-${rounded}`)}
         onClick={() => (open ? closeDropdown() : openDropdown())}
         onKeyDown={handleKeyDown}
         disabled={disabled}

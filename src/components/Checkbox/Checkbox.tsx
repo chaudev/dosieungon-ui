@@ -2,6 +2,7 @@ import React, { InputHTMLAttributes, ReactNode, forwardRef } from 'react';
 import '../../styles/variables.css';
 import './Checkbox.css';
 import { cn } from '../../utils/cn';
+import type { Rounded } from '../../utils/types';
 
 export type CheckboxSize = 'sm' | 'md' | 'lg';
 
@@ -9,10 +10,12 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
   label?: ReactNode;
   indeterminate?: boolean;
   size?: CheckboxSize;
+  /** Border-radius preset for the checkbox indicator */
+  rounded?: Rounded;
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ label, indeterminate = false, checked, size = 'md', disabled, className, onChange, ...props }, ref) => {
+  ({ label, indeterminate = false, checked, size = 'md', rounded, disabled, className, onChange, ...props }, ref) => {
     const isChecked = checked ?? false;
 
     return (
@@ -23,6 +26,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           isChecked && !indeterminate && 'dsg-checkbox--checked',
           indeterminate && 'dsg-checkbox--indeterminate',
           disabled && 'dsg-checkbox--disabled',
+          rounded && `dsg-checkbox--rounded-${rounded}`,
           className
         )}
       >

@@ -187,3 +187,10 @@
 .dsg-drawer--bottom .dsg-drawer__header {
   position: relative;
 }
+
+/* ── Rounded variants (override placement-specific radius) ── */
+.dsg-drawer.dsg-drawer--rounded-none { border-radius: 0; }
+.dsg-drawer.dsg-drawer--rounded-sm   { border-radius: var(--dsg-radius-sm); }
+.dsg-drawer.dsg-drawer--rounded-md   { border-radius: var(--dsg-radius); }
+.dsg-drawer.dsg-drawer--rounded-lg   { border-radius: var(--dsg-radius-lg); }
+.dsg-drawer.dsg-drawer--rounded-full { border-radius: var(--dsg-radius-full); }

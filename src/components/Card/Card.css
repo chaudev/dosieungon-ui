@@ -62,3 +62,10 @@
   background: var(--dsg-surface);
   font-size: 13px;
 }
+
+/* ── Rounded variants ── */
+.dsg-card.dsg-card--rounded-none { border-radius: 0; }
+.dsg-card.dsg-card--rounded-sm   { border-radius: var(--dsg-radius-sm); }
+.dsg-card.dsg-card--rounded-md   { border-radius: var(--dsg-radius); }
+.dsg-card.dsg-card--rounded-lg   { border-radius: var(--dsg-radius-lg); }
+.dsg-card.dsg-card--rounded-full { border-radius: var(--dsg-radius-full); }

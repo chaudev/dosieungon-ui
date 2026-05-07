@@ -2,6 +2,7 @@ import React, { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 import '../../styles/variables.css';
 import './Button.css';
 import { cn } from '../../utils/cn';
+import type { Rounded } from '../../utils/types';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'warning' | 'outline' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
@@ -21,6 +22,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   rightIcon?: ReactNode;
   /** For outline variant — color variant (danger | warning | secondary) */
   color?: 'danger' | 'warning' | 'secondary';
+  /** Border-radius preset — overrides size default */
+  rounded?: Rounded;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -33,6 +36,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       leftIcon,
       rightIcon,
       color,
+      rounded,
       children,
       className,
       disabled,
@@ -52,6 +56,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           color && `dsg-btn--${color}`,
           iconOnly && 'dsg-btn--icon-only',
           loading && 'dsg-btn--loading',
+          rounded && `dsg-btn--rounded-${rounded}`,
           className
         )}
         disabled={disabled || loading}

@@ -2,6 +2,7 @@ import React, { HTMLAttributes, ReactNode } from 'react';
 import '../../styles/variables.css';
 import './Card.css';
 import { cn } from '../../utils/cn';
+import type { Rounded } from '../../utils/types';
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   /** Content for the card header */
@@ -17,6 +18,8 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   /** Class applied to the body section */
   bodyClassName?: string;
   children?: ReactNode;
+  /** Border-radius preset */
+  rounded?: Rounded;
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -26,6 +29,7 @@ export const Card: React.FC<CardProps> = ({
   clickable = false,
   shadow = false,
   bodyClassName,
+  rounded,
   children,
   className,
   onClick,
@@ -40,6 +44,7 @@ export const Card: React.FC<CardProps> = ({
         hoverable && 'dsg-card--hoverable',
         clickable && 'dsg-card--clickable',
         shadow && 'dsg-card--shadow',
+        rounded && `dsg-card--rounded-${rounded}`,
         className
       )}
       onClick={onClick}

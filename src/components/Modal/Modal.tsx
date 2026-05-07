@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import '../../styles/variables.css';
 import './Modal.css';
 import { cn } from '../../utils/cn';
+import type { Rounded } from '../../utils/types';
 
 export type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
@@ -28,6 +29,8 @@ export interface ModalProps {
   footer?: ReactNode;
   /** Hide the × close button */
   hideCloseButton?: boolean;
+  /** Border-radius preset for the modal panel */
+  rounded?: Rounded;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -37,6 +40,7 @@ export const Modal: React.FC<ModalProps> = ({
   size = 'md',
   closeOnBackdrop = true,
   closeOnEscape = true,
+  rounded,
   className,
   bodyClassName,
   children,
@@ -101,7 +105,7 @@ export const Modal: React.FC<ModalProps> = ({
       aria-label={typeof title === 'string' ? title : undefined}
     >
       <div
-        className={cn('dsg-modal', `dsg-modal--${size}`, className)}
+        className={cn('dsg-modal', `dsg-modal--${size}`, rounded && `dsg-modal--rounded-${rounded}`, className)}
         role="document"
       >
         {(title != null || !hideCloseButton) && (

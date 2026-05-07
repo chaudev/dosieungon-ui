@@ -2,6 +2,7 @@ import React, { HTMLAttributes, ReactNode, MouseEvent } from 'react';
 import '../../styles/variables.css';
 import './Chip.css';
 import { cn } from '../../utils/cn';
+import type { Rounded } from '../../utils/types';
 
 export type ChipVariant = 'filled' | 'outlined';
 export type ChipColor = 'primary' | 'secondary' | 'danger' | 'warning' | 'success';
@@ -16,6 +17,8 @@ export interface ChipProps extends Omit<HTMLAttributes<HTMLElement>, 'onClick'> 
   /** Make the chip interactive */
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   children?: ReactNode;
+  /** Border-radius preset — default is full (pill) */
+  rounded?: Rounded;
 }
 
 export const Chip: React.FC<ChipProps> = ({
@@ -24,6 +27,7 @@ export const Chip: React.FC<ChipProps> = ({
   size = 'md',
   onClose,
   onClick,
+  rounded,
   children,
   className,
   ...props
@@ -39,6 +43,7 @@ export const Chip: React.FC<ChipProps> = ({
         `dsg-chip--${color}`,
         `dsg-chip--${size}`,
         onClick && 'dsg-chip--clickable',
+        rounded && `dsg-chip--rounded-${rounded}`,
         className
       )}
       onClick={onClick as any}

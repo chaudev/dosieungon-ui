@@ -119,3 +119,10 @@
   padding-top: 16px;
   margin-top: 4px;
 }
+
+/* ── Rounded variants ── */
+.dsg-modal.dsg-modal--rounded-none { border-radius: 0; }
+.dsg-modal.dsg-modal--rounded-sm   { border-radius: var(--dsg-radius-sm); }
+.dsg-modal.dsg-modal--rounded-md   { border-radius: var(--dsg-radius); }
+.dsg-modal.dsg-modal--rounded-lg   { border-radius: var(--dsg-radius-lg); }
+.dsg-modal.dsg-modal--rounded-full { border-radius: var(--dsg-radius-full); }

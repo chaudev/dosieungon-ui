@@ -227,3 +227,10 @@
   height: 1em;
   font-size: 16px;
 }
+
+/* ── Rounded variants (override size default) ── */
+.dsg-btn.dsg-btn--rounded-none { border-radius: 0; }
+.dsg-btn.dsg-btn--rounded-sm   { border-radius: var(--dsg-radius-sm); }
+.dsg-btn.dsg-btn--rounded-md   { border-radius: var(--dsg-radius); }
+.dsg-btn.dsg-btn--rounded-lg   { border-radius: var(--dsg-radius-lg); }
+.dsg-btn.dsg-btn--rounded-full { border-radius: var(--dsg-radius-full); }

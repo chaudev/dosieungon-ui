@@ -7,6 +7,7 @@ import React, {
 import '../../styles/variables.css';
 import './Input.css';
 import { cn } from '../../utils/cn';
+import type { Rounded } from '../../utils/types';
 
 type InputSize = 'sm' | 'md' | 'lg';
 
@@ -18,6 +19,8 @@ interface BaseInputProps {
   size?: InputSize;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  /** Border-radius preset for the input field */
+  rounded?: Rounded;
   className?: string;
   wrapperClassName?: string;
 }
@@ -49,6 +52,7 @@ export const Input = forwardRef<
     size = 'md',
     leftIcon,
     rightIcon,
+    rounded,
     className,
     wrapperClassName,
     disabled,
@@ -83,6 +87,7 @@ export const Input = forwardRef<
           'dsg-input-wrapper',
           leftIcon && 'dsg-input-wrapper--has-prefix',
           rightIcon && 'dsg-input-wrapper--has-suffix',
+          rounded && `dsg-input-wrapper--rounded-${rounded}`,
           wrapperClassName
         )}
       >
