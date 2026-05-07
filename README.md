@@ -1,9 +1,9 @@
-# dosieungon
+# dosieungon-ui
 
 Lightweight, beautiful React UI component library. Install and use — no extra config needed.
 
 ```bash
-npm install dosieungon
+npm install dosieungon-ui
 ```
 
 - Zero runtime dependencies
@@ -17,7 +17,7 @@ npm install dosieungon
 ## Quick Start
 
 ```tsx
-import { Button, Modal, Select } from 'dosieungon';
+import { Button, Modal, Select } from 'dosieungon-ui';
 
 export default function App() {
   return <Button>Click me</Button>;
@@ -48,7 +48,7 @@ That's it. No CSS import. No provider wrapper.
 ## Button
 
 ```tsx
-import { Button } from 'dosieungon';
+import { Button } from 'dosieungon-ui';
 ```
 
 ### Variants
@@ -88,7 +88,7 @@ import { Button } from 'dosieungon';
 ### With icons
 
 ```tsx
-import { Button } from 'dosieungon';
+import { Button } from 'dosieungon-ui';
 
 // Left icon
 <Button leftIcon={<SearchIcon />}>Search</Button>
@@ -119,7 +119,7 @@ import { Button } from 'dosieungon';
 ## Input
 
 ```tsx
-import { Input } from 'dosieungon';
+import { Input } from 'dosieungon-ui';
 ```
 
 ### Basic
@@ -224,7 +224,7 @@ const [value, setValue] = useState('');
 Custom dropdown — single select, multi-select, search, option groups.
 
 ```tsx
-import { Select } from 'dosieungon';
+import { Select } from 'dosieungon-ui';
 ```
 
 ### Basic
@@ -390,7 +390,7 @@ interface SelectGroup {
 ## Checkbox
 
 ```tsx
-import { Checkbox } from 'dosieungon';
+import { Checkbox } from 'dosieungon-ui';
 ```
 
 ### Basic (uncontrolled)
@@ -452,7 +452,7 @@ const someChecked = items.some(i => i.checked);
 ## Radio
 
 ```tsx
-import { Radio } from 'dosieungon';
+import { Radio } from 'dosieungon-ui';
 ```
 
 ### Basic
@@ -531,7 +531,7 @@ const [plan, setPlan] = useState('free');
 ## Switch
 
 ```tsx
-import { Switch } from 'dosieungon';
+import { Switch } from 'dosieungon-ui';
 ```
 
 ### Basic
@@ -583,7 +583,7 @@ const [enabled, setEnabled] = useState(false);
 ## Modal
 
 ```tsx
-import { Modal, Button } from 'dosieungon';
+import { Modal, Button } from 'dosieungon-ui';
 ```
 
 ### Basic
@@ -668,7 +668,7 @@ const [open, setOpen] = useState(false);
 ## Drawer
 
 ```tsx
-import { Drawer, Button } from 'dosieungon';
+import { Drawer, Button } from 'dosieungon-ui';
 ```
 
 ### Basic
@@ -749,7 +749,7 @@ For `top`/`bottom`: controls **max-height**.
 ## Card
 
 ```tsx
-import { Card } from 'dosieungon';
+import { Card } from 'dosieungon-ui';
 ```
 
 ### Basic
@@ -813,7 +813,7 @@ import { Card } from 'dosieungon';
 ## Chip
 
 ```tsx
-import { Chip } from 'dosieungon';
+import { Chip } from 'dosieungon-ui';
 ```
 
 ### Basic
@@ -971,7 +971,7 @@ No extra setup required. Just import and use.
 
 ```tsx
 // app/page.tsx or pages/index.tsx
-import { Button } from 'dosieungon';
+import { Button } from 'dosieungon-ui';
 
 export default function Page() {
   return <Button>Hello</Button>;
@@ -984,7 +984,7 @@ For interactive components (Modal, Select, Drawer, etc.) in App Router, add `'us
 'use client';
 
 import { useState } from 'react';
-import { Modal, Button } from 'dosieungon';
+import { Modal, Button } from 'dosieungon-ui';
 
 export default function Page() {
   const [open, setOpen] = useState(false);
