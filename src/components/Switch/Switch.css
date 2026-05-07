@@ -1,0 +1,123 @@
+.dsg-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: var(--dsg-font);
+  font-size: 14px;
+  color: var(--dsg-text);
+  box-sizing: border-box;
+}
+
+.dsg-switch--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dsg-switch__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.dsg-switch__track {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  background: var(--dsg-border);
+  border-radius: var(--dsg-radius-full);
+  transition: background var(--dsg-transition);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.dsg-switch__thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: transform var(--dsg-transition), width var(--dsg-transition);
+  box-sizing: border-box;
+}
+
+.dsg-switch__input:focus-visible ~ .dsg-switch__track {
+  box-shadow: 0 0 0 3px var(--dsg-primary-subtle);
+}
+
+.dsg-switch--checked .dsg-switch__track {
+  background: var(--dsg-primary);
+}
+
+.dsg-switch--checked .dsg-switch__thumb {
+  transform: translateX(18px);
+}
+
+.dsg-switch:hover:not(.dsg-switch--disabled) .dsg-switch__thumb {
+  width: 18px;
+}
+
+.dsg-switch--checked:hover:not(.dsg-switch--disabled) .dsg-switch__thumb {
+  width: 18px;
+  transform: translateX(16px);
+}
+
+.dsg-switch__label {
+  line-height: 1.4;
+}
+
+/* Sizes */
+.dsg-switch--sm .dsg-switch__track {
+  width: 32px;
+  height: 18px;
+}
+.dsg-switch--sm .dsg-switch__thumb {
+  width: 12px;
+  height: 12px;
+  top: 3px;
+  left: 3px;
+}
+.dsg-switch--sm.dsg-switch--checked .dsg-switch__thumb {
+  transform: translateX(14px);
+}
+.dsg-switch--sm {
+  font-size: 13px;
+}
+.dsg-switch--sm:hover:not(.dsg-switch--disabled) .dsg-switch__thumb {
+  width: 14px;
+}
+.dsg-switch--sm.dsg-switch--checked:hover:not(.dsg-switch--disabled) .dsg-switch__thumb {
+  width: 14px;
+  transform: translateX(12px);
+}
+
+.dsg-switch--lg .dsg-switch__track {
+  width: 50px;
+  height: 28px;
+}
+.dsg-switch--lg .dsg-switch__thumb {
+  width: 20px;
+  height: 20px;
+  top: 4px;
+  left: 4px;
+}
+.dsg-switch--lg.dsg-switch--checked .dsg-switch__thumb {
+  transform: translateX(22px);
+}
+.dsg-switch--lg {
+  font-size: 15px;
+}
+.dsg-switch--lg:hover:not(.dsg-switch--disabled) .dsg-switch__thumb {
+  width: 22px;
+}
+.dsg-switch--lg.dsg-switch--checked:hover:not(.dsg-switch--disabled) .dsg-switch__thumb {
+  width: 22px;
+  transform: translateX(20px);
+}

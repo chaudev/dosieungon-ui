@@ -1,0 +1,146 @@
+.dsg-input-root {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  font-family: var(--dsg-font);
+  box-sizing: border-box;
+}
+
+.dsg-input__label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dsg-text);
+  line-height: 1.4;
+  display: block;
+}
+
+.dsg-input__label--required::after {
+  content: ' *';
+  color: var(--dsg-danger);
+}
+
+.dsg-input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  border: 1.5px solid var(--dsg-border);
+  border-radius: var(--dsg-radius);
+  background: var(--dsg-bg);
+  transition: border-color var(--dsg-transition), box-shadow var(--dsg-transition);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.dsg-input-wrapper:focus-within {
+  border-color: var(--dsg-primary);
+  box-shadow: 0 0 0 3px var(--dsg-primary-subtle);
+}
+
+.dsg-input-root--error .dsg-input-wrapper {
+  border-color: var(--dsg-danger);
+}
+
+.dsg-input-root--error .dsg-input-wrapper:focus-within {
+  box-shadow: 0 0 0 3px var(--dsg-danger-subtle);
+}
+
+.dsg-input-root--disabled .dsg-input-wrapper {
+  background: var(--dsg-surface);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dsg-input__addon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  color: var(--dsg-text-muted);
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.dsg-input__addon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.dsg-input__addon--prefix {
+  padding-right: 0;
+}
+
+.dsg-input__addon--suffix {
+  padding-left: 0;
+}
+
+.dsg-input__field {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--dsg-font);
+  font-size: 14px;
+  color: var(--dsg-text);
+  padding: 8px 12px;
+  box-sizing: border-box;
+  line-height: 1.5;
+  transition: color var(--dsg-transition);
+}
+
+.dsg-input__field::placeholder {
+  color: var(--dsg-text-muted);
+}
+
+.dsg-input__field:disabled {
+  cursor: not-allowed;
+}
+
+/* Sizes */
+.dsg-input-root--sm .dsg-input__field {
+  padding: 5px 10px;
+  font-size: 13px;
+}
+
+.dsg-input-root--sm .dsg-input-wrapper {
+  border-radius: var(--dsg-radius-sm);
+}
+
+.dsg-input-root--lg .dsg-input__field {
+  padding: 10px 14px;
+  font-size: 15px;
+}
+
+.dsg-input-root--lg .dsg-input-wrapper {
+  border-radius: var(--dsg-radius-lg);
+}
+
+/* Prefix has padding right already on field */
+.dsg-input-wrapper--has-prefix .dsg-input__field {
+  padding-left: 4px;
+}
+
+.dsg-input-wrapper--has-suffix .dsg-input__field {
+  padding-right: 4px;
+}
+
+.dsg-input__hint {
+  font-size: 12px;
+  color: var(--dsg-text-muted);
+  line-height: 1.4;
+}
+
+.dsg-input__error-msg {
+  font-size: 12px;
+  color: var(--dsg-danger);
+  line-height: 1.4;
+}
+
+/* Textarea */
+.dsg-input__field--textarea {
+  resize: vertical;
+  min-height: 80px;
+  padding: 10px 12px;
+  align-self: stretch;
+}

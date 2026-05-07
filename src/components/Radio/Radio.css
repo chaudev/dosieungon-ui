@@ -1,0 +1,112 @@
+.dsg-radio-group {
+  display: flex;
+  gap: 8px;
+  font-family: var(--dsg-font);
+  box-sizing: border-box;
+}
+
+.dsg-radio-group--vertical {
+  flex-direction: column;
+}
+
+.dsg-radio-group--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.dsg-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: var(--dsg-font);
+  font-size: 14px;
+  color: var(--dsg-text);
+  box-sizing: border-box;
+}
+
+.dsg-radio--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dsg-radio__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.dsg-radio__indicator {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--dsg-border);
+  background: var(--dsg-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color var(--dsg-transition), background var(--dsg-transition), box-shadow var(--dsg-transition);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.dsg-radio__indicator::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+  transform: scale(0);
+  transition: transform var(--dsg-transition);
+}
+
+.dsg-radio:hover:not(.dsg-radio--disabled) .dsg-radio__indicator {
+  border-color: var(--dsg-primary);
+}
+
+.dsg-radio--checked .dsg-radio__indicator {
+  border-color: var(--dsg-primary);
+  background: var(--dsg-primary);
+}
+
+.dsg-radio--checked .dsg-radio__indicator::after {
+  transform: scale(1);
+}
+
+.dsg-radio__input:focus-visible ~ .dsg-radio__indicator {
+  box-shadow: 0 0 0 3px var(--dsg-primary-subtle);
+}
+
+.dsg-radio__label {
+  line-height: 1.4;
+}
+
+/* Sizes */
+.dsg-radio-group--sm .dsg-radio {
+  font-size: 13px;
+}
+.dsg-radio-group--sm .dsg-radio__indicator {
+  width: 15px;
+  height: 15px;
+}
+.dsg-radio-group--sm .dsg-radio__indicator::after {
+  width: 6px;
+  height: 6px;
+}
+
+.dsg-radio-group--lg .dsg-radio {
+  font-size: 15px;
+}
+.dsg-radio-group--lg .dsg-radio__indicator {
+  width: 22px;
+  height: 22px;
+}
+.dsg-radio-group--lg .dsg-radio__indicator::after {
+  width: 10px;
+  height: 10px;
+}

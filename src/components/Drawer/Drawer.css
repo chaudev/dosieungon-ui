@@ -1,0 +1,189 @@
+/* Overlay */
+.dsg-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--dsg-bg-overlay);
+  z-index: var(--dsg-z-drawer);
+  opacity: 0;
+  transition: opacity var(--dsg-transition-slow);
+  box-sizing: border-box;
+}
+
+.dsg-drawer-overlay--visible {
+  opacity: 1;
+}
+
+/* Drawer panel */
+.dsg-drawer {
+  position: fixed;
+  background: var(--dsg-bg);
+  box-shadow: var(--dsg-shadow-xl);
+  display: flex;
+  flex-direction: column;
+  z-index: var(--dsg-z-drawer);
+  box-sizing: border-box;
+  font-family: var(--dsg-font);
+  color: var(--dsg-text);
+  transition: transform var(--dsg-transition-slow);
+}
+
+/* Placements */
+.dsg-drawer--left {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  transform: translateX(-100%);
+  border-right: 1px solid var(--dsg-border);
+}
+
+.dsg-drawer--right {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateX(100%);
+  border-left: 1px solid var(--dsg-border);
+}
+
+.dsg-drawer--top {
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(-100%);
+  border-bottom: 1px solid var(--dsg-border);
+}
+
+.dsg-drawer--bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(100%);
+  border-top: 1px solid var(--dsg-border);
+  border-radius: var(--dsg-radius-xl) var(--dsg-radius-xl) 0 0;
+}
+
+/* Visible state */
+.dsg-drawer--left.dsg-drawer--visible,
+.dsg-drawer--right.dsg-drawer--visible {
+  transform: translateX(0);
+}
+
+.dsg-drawer--top.dsg-drawer--visible,
+.dsg-drawer--bottom.dsg-drawer--visible {
+  transform: translateY(0);
+}
+
+/* Sizes for left/right */
+.dsg-drawer--left.dsg-drawer--sm,
+.dsg-drawer--right.dsg-drawer--sm { width: 280px; }
+
+.dsg-drawer--left.dsg-drawer--md,
+.dsg-drawer--right.dsg-drawer--md { width: 400px; }
+
+.dsg-drawer--left.dsg-drawer--lg,
+.dsg-drawer--right.dsg-drawer--lg { width: 560px; }
+
+.dsg-drawer--left.dsg-drawer--full,
+.dsg-drawer--right.dsg-drawer--full { width: 100vw; }
+
+/* Sizes for top/bottom */
+.dsg-drawer--top.dsg-drawer--sm,
+.dsg-drawer--bottom.dsg-drawer--sm { max-height: 30vh; }
+
+.dsg-drawer--top.dsg-drawer--md,
+.dsg-drawer--bottom.dsg-drawer--md { max-height: 50vh; }
+
+.dsg-drawer--top.dsg-drawer--lg,
+.dsg-drawer--bottom.dsg-drawer--lg { max-height: 70vh; }
+
+.dsg-drawer--top.dsg-drawer--full,
+.dsg-drawer--bottom.dsg-drawer--full { max-height: 100vh; }
+
+/* Header */
+.dsg-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--dsg-border);
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.dsg-drawer__title {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--dsg-text);
+  font-family: var(--dsg-font);
+  line-height: 1.4;
+}
+
+.dsg-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--dsg-radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--dsg-text-muted);
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  margin-left: auto;
+  outline: none;
+  font-family: var(--dsg-font);
+}
+
+.dsg-drawer__close:hover {
+  background: var(--dsg-surface);
+  color: var(--dsg-text);
+}
+
+.dsg-drawer__close:focus-visible {
+  box-shadow: 0 0 0 3px var(--dsg-primary-subtle);
+}
+
+/* Body */
+.dsg-drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Footer */
+.dsg-drawer__footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--dsg-border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Bottom drawer drag handle */
+.dsg-drawer--bottom .dsg-drawer__header {
+  padding-top: 12px;
+}
+
+.dsg-drawer--bottom .dsg-drawer__header::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--dsg-border);
+}
+
+.dsg-drawer--bottom .dsg-drawer__header {
+  position: relative;
+}

@@ -1,0 +1,144 @@
+.dsg-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--dsg-radius-full);
+  font-family: var(--dsg-font);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  box-sizing: border-box;
+  white-space: nowrap;
+  border: 1.5px solid transparent;
+  transition: background var(--dsg-transition), border-color var(--dsg-transition), color var(--dsg-transition), opacity var(--dsg-transition);
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Sizes */
+.dsg-chip--sm {
+  padding: 2px 8px;
+  font-size: 11px;
+  gap: 4px;
+}
+
+.dsg-chip--lg {
+  padding: 5px 14px;
+  font-size: 13px;
+  gap: 6px;
+}
+
+/* Clickable */
+.dsg-chip--clickable {
+  cursor: pointer;
+  outline: none;
+}
+
+.dsg-chip--clickable:focus-visible {
+  box-shadow: 0 0 0 3px var(--dsg-primary-subtle);
+}
+
+/* Close button */
+.dsg-chip__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  color: currentColor;
+  opacity: 0.6;
+  border-radius: 50%;
+  transition: opacity var(--dsg-transition), background var(--dsg-transition);
+  flex-shrink: 0;
+}
+
+.dsg-chip__close:hover {
+  opacity: 1;
+  background: rgba(0,0,0,0.1);
+}
+
+/* Filled variants */
+.dsg-chip--filled.dsg-chip--primary {
+  background: var(--dsg-primary-subtle);
+  color: var(--dsg-primary);
+  border-color: transparent;
+}
+.dsg-chip--filled.dsg-chip--primary.dsg-chip--clickable:hover {
+  background: var(--dsg-primary-subtle-hover);
+}
+
+.dsg-chip--filled.dsg-chip--secondary {
+  background: var(--dsg-surface);
+  color: var(--dsg-text-secondary);
+  border-color: transparent;
+}
+.dsg-chip--filled.dsg-chip--secondary.dsg-chip--clickable:hover {
+  background: var(--dsg-surface-hover);
+}
+
+.dsg-chip--filled.dsg-chip--danger {
+  background: var(--dsg-danger-subtle);
+  color: var(--dsg-danger);
+  border-color: transparent;
+}
+.dsg-chip--filled.dsg-chip--danger.dsg-chip--clickable:hover {
+  background: rgba(239,68,68,0.15);
+}
+
+.dsg-chip--filled.dsg-chip--warning {
+  background: var(--dsg-warning-subtle);
+  color: var(--dsg-warning-hover);
+  border-color: transparent;
+}
+
+.dsg-chip--filled.dsg-chip--success {
+  background: var(--dsg-success-subtle);
+  color: var(--dsg-success);
+  border-color: transparent;
+}
+
+/* Outlined variants */
+.dsg-chip--outlined.dsg-chip--primary {
+  background: transparent;
+  color: var(--dsg-primary);
+  border-color: var(--dsg-primary);
+}
+.dsg-chip--outlined.dsg-chip--primary.dsg-chip--clickable:hover {
+  background: var(--dsg-primary-subtle);
+}
+
+.dsg-chip--outlined.dsg-chip--secondary {
+  background: transparent;
+  color: var(--dsg-text-secondary);
+  border-color: var(--dsg-border);
+}
+.dsg-chip--outlined.dsg-chip--secondary.dsg-chip--clickable:hover {
+  background: var(--dsg-surface);
+}
+
+.dsg-chip--outlined.dsg-chip--danger {
+  background: transparent;
+  color: var(--dsg-danger);
+  border-color: var(--dsg-danger);
+}
+.dsg-chip--outlined.dsg-chip--danger.dsg-chip--clickable:hover {
+  background: var(--dsg-danger-subtle);
+}
+
+.dsg-chip--outlined.dsg-chip--warning {
+  background: transparent;
+  color: var(--dsg-warning-hover);
+  border-color: var(--dsg-warning);
+}
+
+.dsg-chip--outlined.dsg-chip--success {
+  background: transparent;
+  color: var(--dsg-success);
+  border-color: var(--dsg-success);
+}
