@@ -2,6 +2,8 @@
 
 Lightweight, beautiful React UI component library. Install and use — no extra config needed.
 
+> 📖 **Full documentation:** [dosieungon.com/ui](https://dosieungon.com/ui)
+
 ```bash
 npm install dosieungon-ui
 ```
@@ -9,7 +11,7 @@ npm install dosieungon-ui
 - Zero runtime dependencies
 - CSS auto-injected — no import needed
 - TypeScript ready (full type support)
-- Dark mode built-in (auto via `prefers-color-scheme`)
+- Dark mode via built-in `DSNProvider` — auto follows system, persists to localStorage
 - Works with React 17+, Next.js (App Router & Pages Router)
 
 ---
@@ -30,6 +32,7 @@ That's it. No CSS import. No provider wrapper.
 
 ## Table of Contents
 
+- [DSNProvider & Dark Mode](#dsnprovider--dark-mode)
 - [Button](#button)
 - [Input](#input)
 - [Select](#select)
@@ -40,8 +43,8 @@ That's it. No CSS import. No provider wrapper.
 - [Drawer](#drawer)
 - [Card](#card)
 - [Chip](#chip)
+- [Table](#table)
 - [Customization](#customization)
-- [Dark Mode](#dark-mode)
 
 ---
 
@@ -100,6 +103,15 @@ import { Button } from 'dosieungon-ui';
 <Button iconOnly leftIcon={<PlusIcon />} aria-label="Add" />
 ```
 
+### Rounded
+
+```tsx
+<Button rounded="sm">Slightly rounded</Button>
+<Button rounded="lg">More rounded</Button>
+<Button rounded="full">Pill button</Button>
+<Button rounded="none">Sharp corners</Button>
+```
+
 ### All Button props
 
 | Prop | Type | Default | Description |
@@ -111,6 +123,7 @@ import { Button } from 'dosieungon-ui';
 | `leftIcon` | `ReactNode` | — | Icon before label |
 | `rightIcon` | `ReactNode` | — | Icon after label |
 | `color` | `'danger' \| 'warning' \| 'secondary'` | — | Color for `outline` variant |
+| `rounded` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'full'` | — | Override corner radius |
 | `className` | `string` | — | Extra CSS class |
 | `...` | `ButtonHTMLAttributes` | — | All native `<button>` props |
 
@@ -211,6 +224,7 @@ const [value, setValue] = useState('');
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size preset |
 | `leftIcon` | `ReactNode` | — | Icon on the left |
 | `rightIcon` | `ReactNode` | — | Icon on the right |
+| `rounded` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'full'` | — | Override corner radius |
 | `multiline` | `true` | — | Render as `<textarea>` |
 | `rows` | `number` | — | Rows (textarea only) |
 | `wrapperClassName` | `string` | — | Class on the input wrapper div |
@@ -363,6 +377,7 @@ const [tags, setTags] = useState<string[]>([]);
 | `error` | `string` | — | Error message |
 | `hint` | `string` | — | Helper text |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size preset |
+| `rounded` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'full'` | — | Override corner radius |
 | `emptyText` | `string` | `'No options found'` | Empty search result text |
 | `className` | `string` | — | Class on root element |
 
@@ -443,6 +458,7 @@ const someChecked = items.some(i => i.checked);
 | `indeterminate` | `boolean` | `false` | Shows dash (partially checked) |
 | `label` | `ReactNode` | — | Label text |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size preset |
+| `rounded` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'full'` | — | Override corner radius of the indicator |
 | `disabled` | `boolean` | `false` | Disable interaction |
 | `className` | `string` | — | Class on root element |
 | `...` | `InputHTMLAttributes` | — | All native `<input>` props (except `type`, `size`) |
@@ -514,6 +530,7 @@ const [plan, setPlan] = useState('free');
 | `onChange` | `(value) => void` | — | Change handler |
 | `direction` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout direction |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size preset |
+| `rounded` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'full'` | — | Override corner radius of the indicator |
 | `disabled` | `boolean` | `false` | Disable all radios |
 | `name` | `string` | auto-generated | HTML `name` attribute |
 | `className` | `string` | — | Class on group wrapper |
@@ -574,6 +591,7 @@ const [enabled, setEnabled] = useState(false);
 | `label` | `ReactNode` | — | Label text |
 | `labelPosition` | `'left' \| 'right'` | `'right'` | Label side |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size preset |
+| `rounded` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'full'` | — | Override corner radius of the track |
 | `disabled` | `boolean` | `false` | Disable interaction |
 | `className` | `string` | — | Class on root element |
 | `...` | `InputHTMLAttributes` | — | All native `<input>` props (except `type`, `size`) |
@@ -660,6 +678,7 @@ const [open, setOpen] = useState(false);
 | `closeOnBackdrop` | `boolean` | `true` | Close on backdrop click |
 | `closeOnEscape` | `boolean` | `true` | Close on Escape key |
 | `hideCloseButton` | `boolean` | `false` | Hide the × button |
+| `rounded` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'full'` | — | Override corner radius of the panel |
 | `className` | `string` | — | Class on modal panel |
 | `bodyClassName` | `string` | — | Class on body area |
 
@@ -690,10 +709,10 @@ const [open, setOpen] = useState(false);
 ### Placements
 
 ```tsx
-<Drawer placement="right" ...>  {/* default — slides from right */}
-<Drawer placement="left"  ...>  {/* slides from left */}
-<Drawer placement="top"   ...>  {/* slides from top */}
-<Drawer placement="bottom" ...> {/* slides from bottom — sheet style */}
+<Drawer placement="right" ...>   {/* default — slides from right */}
+<Drawer placement="left"  ...>   {/* slides from left */}
+<Drawer placement="top"   ...>   {/* slides from top */}
+<Drawer placement="bottom" ...>  {/* slides from bottom — sheet style */}
 ```
 
 ### Sizes
@@ -741,6 +760,7 @@ For `top`/`bottom`: controls **max-height**.
 | `closeOnBackdrop` | `boolean` | `true` | Close on backdrop click |
 | `closeOnEscape` | `boolean` | `true` | Close on Escape key |
 | `hideCloseButton` | `boolean` | `false` | Hide the × button |
+| `rounded` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'full'` | — | Override corner radius of the panel |
 | `className` | `string` | — | Class on drawer panel |
 | `bodyClassName` | `string` | — | Class on body area |
 
@@ -804,6 +824,7 @@ import { Card } from 'dosieungon-ui';
 | `hoverable` | `boolean` | `false` | Lift animation on hover |
 | `clickable` | `boolean` | `false` | Renders as `<button>`, full click area |
 | `shadow` | `boolean` | `false` | Shadow instead of border |
+| `rounded` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'full'` | — | Override corner radius |
 | `bodyClassName` | `string` | — | Class on body section |
 | `className` | `string` | — | Class on root element |
 | `...` | `HTMLAttributes<HTMLDivElement>` | — | All native div/button props |
@@ -871,9 +892,155 @@ const [tags, setTags] = useState(['React', 'TypeScript', 'Vite']);
 | `variant` | `'filled' \| 'outlined'` | `'filled'` | Visual style |
 | `color` | `'primary' \| 'secondary' \| 'danger' \| 'warning' \| 'success'` | `'primary'` | Color |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size preset |
+| `rounded` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'full'` | — | Override corner radius |
 | `onClose` | `(e) => void` | — | Show × button, called on click |
 | `onClick` | `(e) => void` | — | Makes chip interactive (renders as `<button>`) |
 | `className` | `string` | — | Extra CSS class |
+
+---
+
+## Table
+
+Full-featured data table with sorting, fixed columns, inner scroll, pagination, and custom colors.
+
+```tsx
+import { Table } from 'dosieungon-ui';
+import type { TableColumn } from 'dosieungon-ui';
+```
+
+### Basic
+
+```tsx
+const columns: TableColumn<User>[] = [
+  { key: 'id',    title: '#',    dataIndex: 'id',    width: 56, align: 'center' },
+  { key: 'name',  title: 'Name', dataIndex: 'name',  sortable: true },
+  { key: 'dept',  title: 'Dept', dataIndex: 'dept' },
+  { key: 'score', title: 'Score',dataIndex: 'score', sortable: true, align: 'right' },
+];
+
+<Table columns={columns} data={users} rowKey="id" hoverable />
+```
+
+### Custom cell renderer
+
+```tsx
+const columns: TableColumn<User>[] = [
+  {
+    key: 'status',
+    title: 'Status',
+    dataIndex: 'status',
+    render: (value, row) => (
+      <Chip color={value === 'Active' ? 'success' : 'secondary'} size="sm">
+        {value}
+      </Chip>
+    ),
+  },
+];
+```
+
+### Fixed columns (horizontal scroll)
+
+```tsx
+const columns: TableColumn<User>[] = [
+  { key: 'id',     title: '#',    dataIndex: 'id',     width: 60,  fixed: 'left'  },
+  { key: 'name',   title: 'Name', dataIndex: 'name',   width: 160, fixed: 'left'  },
+  // ... scrollable columns ...
+  { key: 'status', title: 'Status', dataIndex: 'status', width: 120, fixed: 'right' },
+];
+
+<Table columns={columns} data={data} rowKey="id" />
+```
+
+### Inner scroll (scrollY)
+
+```tsx
+<Table
+  columns={columns}
+  data={data}
+  rowKey="id"
+  scrollY={300}   // max body height; header sticks automatically
+  hoverable
+/>
+```
+
+### Pagination
+
+```tsx
+<Table
+  columns={columns}
+  data={data}          // pass the full dataset
+  rowKey="id"
+  pagination={{
+    pageSize: 10,
+    showTotal: true,
+    pageSizeOptions: [10, 25, 50],
+  }}
+/>
+```
+
+### Custom colors
+
+```tsx
+<Table
+  columns={columns}
+  data={data}
+  rowKey="id"
+  hoverable
+  headerBg="#1e1b4b"
+  headerColor="#c7d2fe"
+  hoverBg="rgba(99, 102, 241, 0.08)"
+/>
+```
+
+### All Table props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `columns` | `TableColumn<T>[]` | — | **Required.** Column definitions |
+| `data` | `T[]` | — | **Required.** Row data array |
+| `rowKey` | `string \| (row) => string \| number` | — | Unique key per row |
+| `loading` | `boolean` | `false` | Show skeleton rows |
+| `loadingRows` | `number` | `5` | Skeleton row count |
+| `bordered` | `boolean` | `false` | Border every cell |
+| `striped` | `boolean` | `false` | Alternate even-row background |
+| `hoverable` | `boolean` | `false` | Highlight rows on hover |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Cell padding preset |
+| `rounded` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'full'` | — | Override corner radius of the wrapper |
+| `scrollY` | `string \| number` | — | Max body height — enables vertical scroll |
+| `fullWidth` | `boolean` | `true` | Stretch table to fill container |
+| `stickyHeader` | `boolean` | `false` | Pin header row (auto-on with `scrollY`) |
+| `headerBg` | `string` | — | Custom header background color |
+| `headerColor` | `string` | — | Custom header text color |
+| `bodyBg` | `string` | — | Custom table body background |
+| `hoverBg` | `string` | — | Custom row hover background |
+| `empty` | `ReactNode` | `'Không có dữ liệu'` | Empty-state content |
+| `caption` | `string` | — | Caption below the table |
+| `pagination` | `TablePaginationConfig` | — | Enable pagination bar |
+| `onSort` | `(key, dir) => void` | — | Sort callback (server-side sort) |
+| `className` | `string` | — | Extra class on the wrapper |
+
+#### TableColumn shape
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `key` | `string` | — | **Required.** Unique column id |
+| `title` | `ReactNode` | — | **Required.** Header content |
+| `dataIndex` | `string` | — | Row field to read |
+| `render` | `(value, row, index) => ReactNode` | — | Custom cell renderer |
+| `width` | `string \| number` | — | Column width (required for fixed columns) |
+| `align` | `'left' \| 'center' \| 'right'` | `'left'` | Cell text alignment |
+| `sortable` | `boolean` | `false` | Enable click-to-sort |
+| `fixed` | `'left' \| 'right'` | — | Pin column — requires `width` |
+
+#### TablePaginationConfig shape
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `pageSize` | `number` | `10` | Rows per page |
+| `total` | `number` | — | Override total for server-side pagination |
+| `showTotal` | `boolean` | `true` | Show "X–Y / Z" counter |
+| `pageSizeOptions` | `number[]` | — | Render a page-size selector |
+| `onChange` | `(page, pageSize) => void` | — | Called on page or size change |
 
 ---
 
@@ -914,53 +1081,73 @@ All colors, sizes, and spacing are CSS custom properties. Override them once in 
 
 ---
 
-## Dark Mode
+## DSNProvider & Dark Mode
 
-Dark mode works automatically via `prefers-color-scheme`. No setup needed.
-
-### Force dark mode
-
-Add `data-dsg-theme="dark"` to any ancestor element:
-
-```html
-<!-- Force dark for the entire page -->
-<html data-dsg-theme="dark">
-```
+Wrap your app once with `DSNProvider` — all library components inside automatically respond to the active theme.
 
 ```tsx
-// Force dark for a specific section
-<div data-dsg-theme="dark">
-  <Card>This card is always dark</Card>
-</div>
-```
+import { DSNProvider } from 'dosieungon-ui';
 
-### Force light mode
-
-```html
-<html data-dsg-theme="light">
-```
-
-### Controlled dark mode toggle
-
-```tsx
-function App() {
-  const [dark, setDark] = useState(false);
-
-  useEffect(() => {
-    document.documentElement.setAttribute(
-      'data-dsg-theme',
-      dark ? 'dark' : 'light'
-    );
-  }, [dark]);
-
+export default function App({ Component, pageProps }) {
   return (
-    <Switch
-      checked={dark}
-      onChange={(e) => setDark(e.target.checked)}
-      label="Dark mode"
-    />
+    <DSNProvider>
+      <Component {...pageProps} />
+    </DSNProvider>
   );
 }
+```
+
+**What it does by default:**
+- Reads `localStorage` for a previously saved preference
+- Falls back to `prefers-color-scheme` (system)
+- Persists the user's choice back to `localStorage`
+- Sets `data-dsg-theme` on `<html>` so portals (Modal, Drawer) also get the theme
+- Toggles `class="dark"/"light"` on `<html>` (Tailwind `dark:` utilities work out of the box)
+
+### Toggle theme
+
+```tsx
+import { useTheme } from 'dosieungon-ui';
+
+function ThemeToggle() {
+  const { resolvedTheme, setTheme } = useTheme();
+  return (
+    <button onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}>
+      {resolvedTheme === 'dark' ? '☀️ Light' : '🌙 Dark'}
+    </button>
+  );
+}
+```
+
+### DSNProvider props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultTheme` | `'light' \| 'dark' \| 'system'` | `'system'` | Initial theme when no localStorage value exists |
+| `theme` | `'light' \| 'dark' \| 'system'` | — | Controlled theme — makes Provider controlled |
+| `storageKey` | `string` | `'dsg-theme'` | localStorage key to persist the choice |
+| `syncDocument` | `boolean` | `true` | Mirror theme onto `<html>` for portals and Tailwind |
+
+### useTheme return value
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `theme` | `'light' \| 'dark' \| 'system'` | Active setting (may be `'system'`) |
+| `resolvedTheme` | `'light' \| 'dark'` | Actual rendered theme — always resolved |
+| `setTheme` | `(theme) => void` | Update the theme |
+
+### Force a specific theme
+
+```tsx
+// Always dark, no persistence
+<DSNProvider theme="dark">
+  <Card>Always dark card</Card>
+</DSNProvider>
+
+// Scoped to a section (no document sync)
+<DSNProvider theme="dark" syncDocument={false}>
+  <Card>Dark section only</Card>
+</DSNProvider>
 ```
 
 ---

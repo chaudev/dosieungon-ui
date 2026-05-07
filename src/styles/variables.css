@@ -64,42 +64,99 @@
   --dsg-z-drawer: 1200;
 }
 
-/* Dark mode via prefers-color-scheme */
+/* ── Dark token set (shared) ──────────────────────────────────── */
+:root {
+  --_dsg-dark-bg: #18181b;
+  --_dsg-dark-bg-overlay: rgba(0, 0, 0, 0.7);
+  --_dsg-dark-surface: #27272a;
+  --_dsg-dark-surface-hover: #3f3f46;
+  --_dsg-dark-border: #3f3f46;
+  --_dsg-dark-text: #fafafa;
+  --_dsg-dark-text-secondary: #a1a1aa;
+  --_dsg-dark-text-muted: #71717a;
+  --_dsg-dark-text-disabled: #52525b;
+  --_dsg-dark-overlay: #fafafa;
+  --_dsg-dark-hover: #3f3f46;
+  --_dsg-dark-shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --_dsg-dark-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --_dsg-dark-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.3);
+  --_dsg-dark-shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.4);
+}
+
+/* ── Light token set (explicit reset for system-dark + forced-light) */
+:root {
+  --_dsg-light-bg: #ffffff;
+  --_dsg-light-bg-overlay: rgba(24, 24, 27, 0.6);
+  --_dsg-light-surface: #f4f4f5;
+  --_dsg-light-surface-hover: #e4e4e7;
+  --_dsg-light-border: #e4e4e7;
+  --_dsg-light-text: #18181b;
+  --_dsg-light-text-secondary: #52525b;
+  --_dsg-light-text-muted: #71717a;
+  --_dsg-light-text-disabled: #a1a1aa;
+  --_dsg-light-overlay: #18181b;
+  --_dsg-light-hover: #27272A;
+  --_dsg-light-shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --_dsg-light-shadow: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --_dsg-light-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --_dsg-light-shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+}
+
+/* ── Dark: system preference (fallback when no DSNProvider / no JS) ── */
 @media (prefers-color-scheme: dark) {
   :root:not([data-dsg-theme="light"]) {
-    --dsg-bg: #18181b;
-    --dsg-bg-overlay: rgba(0, 0, 0, 0.7);
-    --dsg-surface: #27272a;
-    --dsg-surface-hover: #3f3f46;
-    --dsg-border: #3f3f46;
-    --dsg-text: #fafafa;
-    --dsg-text-secondary: #a1a1aa;
-    --dsg-text-muted: #71717a;
-    --dsg-text-disabled: #52525b;
-    --dsg-overlay: #fafafa;
-    --dsg-hover: #3f3f46;
-    --dsg-shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-    --dsg-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
-    --dsg-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.3);
-    --dsg-shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.4);
+    --dsg-bg: var(--_dsg-dark-bg);
+    --dsg-bg-overlay: var(--_dsg-dark-bg-overlay);
+    --dsg-surface: var(--_dsg-dark-surface);
+    --dsg-surface-hover: var(--_dsg-dark-surface-hover);
+    --dsg-border: var(--_dsg-dark-border);
+    --dsg-text: var(--_dsg-dark-text);
+    --dsg-text-secondary: var(--_dsg-dark-text-secondary);
+    --dsg-text-muted: var(--_dsg-dark-text-muted);
+    --dsg-text-disabled: var(--_dsg-dark-text-disabled);
+    --dsg-overlay: var(--_dsg-dark-overlay);
+    --dsg-hover: var(--_dsg-dark-hover);
+    --dsg-shadow-sm: var(--_dsg-dark-shadow-sm);
+    --dsg-shadow: var(--_dsg-dark-shadow);
+    --dsg-shadow-lg: var(--_dsg-dark-shadow-lg);
+    --dsg-shadow-xl: var(--_dsg-dark-shadow-xl);
   }
 }
 
-/* Force dark mode */
+/* ── Dark: explicit — set by DSNProvider on the wrapper div or <html> ── */
 [data-dsg-theme="dark"] {
-  --dsg-bg: #18181b;
-  --dsg-bg-overlay: rgba(0, 0, 0, 0.7);
-  --dsg-surface: #27272a;
-  --dsg-surface-hover: #3f3f46;
-  --dsg-border: #3f3f46;
-  --dsg-text: #fafafa;
-  --dsg-text-secondary: #a1a1aa;
-  --dsg-text-muted: #71717a;
-  --dsg-text-disabled: #52525b;
-  --dsg-overlay: #fafafa;
-  --dsg-hover: #3f3f46;
-  --dsg-shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-  --dsg-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
-  --dsg-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.3);
-  --dsg-shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.4);
+  --dsg-bg: var(--_dsg-dark-bg);
+  --dsg-bg-overlay: var(--_dsg-dark-bg-overlay);
+  --dsg-surface: var(--_dsg-dark-surface);
+  --dsg-surface-hover: var(--_dsg-dark-surface-hover);
+  --dsg-border: var(--_dsg-dark-border);
+  --dsg-text: var(--_dsg-dark-text);
+  --dsg-text-secondary: var(--_dsg-dark-text-secondary);
+  --dsg-text-muted: var(--_dsg-dark-text-muted);
+  --dsg-text-disabled: var(--_dsg-dark-text-disabled);
+  --dsg-overlay: var(--_dsg-dark-overlay);
+  --dsg-hover: var(--_dsg-dark-hover);
+  --dsg-shadow-sm: var(--_dsg-dark-shadow-sm);
+  --dsg-shadow: var(--_dsg-dark-shadow);
+  --dsg-shadow-lg: var(--_dsg-dark-shadow-lg);
+  --dsg-shadow-xl: var(--_dsg-dark-shadow-xl);
+}
+
+/* ── Light: force light even when system prefers dark ── */
+[data-dsg-theme="light"] {
+  --dsg-bg: var(--_dsg-light-bg);
+  --dsg-bg-overlay: var(--_dsg-light-bg-overlay);
+  --dsg-surface: var(--_dsg-light-surface);
+  --dsg-surface-hover: var(--_dsg-light-surface-hover);
+  --dsg-border: var(--_dsg-light-border);
+  --dsg-text: var(--_dsg-light-text);
+  --dsg-text-secondary: var(--_dsg-light-text-secondary);
+  --dsg-text-muted: var(--_dsg-light-text-muted);
+  --dsg-text-disabled: var(--_dsg-light-text-disabled);
+  --dsg-overlay: var(--_dsg-light-overlay);
+  --dsg-hover: var(--_dsg-light-hover);
+  --dsg-shadow-sm: var(--_dsg-light-shadow-sm);
+  --dsg-shadow: var(--_dsg-light-shadow);
+  --dsg-shadow-lg: var(--_dsg-light-shadow-lg);
+  --dsg-shadow-xl: var(--_dsg-light-shadow-xl);
 }

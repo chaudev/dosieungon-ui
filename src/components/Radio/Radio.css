@@ -110,3 +110,19 @@
   width: 10px;
   height: 10px;
 }
+
+/* ── Rounded variants ── */
+.dsg-radio-group.dsg-radio-group--rounded-none .dsg-radio__indicator,
+.dsg-radio-group.dsg-radio-group--rounded-none .dsg-radio__indicator::after { border-radius: 0; }
+
+.dsg-radio-group.dsg-radio-group--rounded-sm .dsg-radio__indicator  { border-radius: var(--dsg-radius-sm); }
+.dsg-radio-group.dsg-radio-group--rounded-sm .dsg-radio__indicator::after { border-radius: var(--dsg-radius-xs); }
+
+.dsg-radio-group.dsg-radio-group--rounded-md .dsg-radio__indicator  { border-radius: var(--dsg-radius); }
+.dsg-radio-group.dsg-radio-group--rounded-md .dsg-radio__indicator::after { border-radius: var(--dsg-radius-xs); }
+
+.dsg-radio-group.dsg-radio-group--rounded-lg .dsg-radio__indicator  { border-radius: var(--dsg-radius-lg); }
+.dsg-radio-group.dsg-radio-group--rounded-lg .dsg-radio__indicator::after { border-radius: var(--dsg-radius-sm); }
+
+.dsg-radio-group.dsg-radio-group--rounded-full .dsg-radio__indicator,
+.dsg-radio-group.dsg-radio-group--rounded-full .dsg-radio__indicator::after { border-radius: 50%; }

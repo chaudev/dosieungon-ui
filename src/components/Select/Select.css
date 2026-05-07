@@ -131,7 +131,7 @@
 
 .dsg-select__chip-remove:hover {
   opacity: 1;
-  background: rgba(2, 133, 247, 0.2);
+  background: var(--dsg-primary-subtle-hover);
 }
 
 /* Right icons */

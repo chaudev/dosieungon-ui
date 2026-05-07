@@ -1,3 +1,7 @@
+// Provider + theme hook
+export { DSNProvider, useTheme } from './provider';
+export type { DSNProviderProps, Theme, ResolvedTheme, ThemeContextValue } from './provider';
+
 // Shared types
 export type { Rounded } from './utils/types';
 

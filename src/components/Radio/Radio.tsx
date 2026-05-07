@@ -8,6 +8,7 @@ import React, {
 import '../../styles/variables.css';
 import './Radio.css';
 import { cn } from '../../utils/cn';
+import type { Rounded } from '../../utils/types';
 
 type RadioSize = 'sm' | 'md' | 'lg';
 type RadioDirection = 'horizontal' | 'vertical';
@@ -32,6 +33,7 @@ export interface RadioGroupProps {
   disabled?: boolean;
   direction?: RadioDirection;
   size?: RadioSize;
+  rounded?: Rounded;
   className?: string;
   children?: ReactNode;
 }
@@ -46,6 +48,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   disabled = false,
   direction = 'vertical',
   size = 'md',
+  rounded,
   className,
   children,
 }) => {
@@ -73,6 +76,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
           'dsg-radio-group',
           `dsg-radio-group--${direction}`,
           `dsg-radio-group--${size}`,
+          rounded && `dsg-radio-group--rounded-${rounded}`,
           className
         )}
         role="radiogroup"
