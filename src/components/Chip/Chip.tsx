@@ -3,6 +3,7 @@ import '../../styles/variables.css';
 import './Chip.css';
 import { cn } from '../../utils/cn';
 import type { Rounded } from '../../utils/types';
+import { renderButtonIcon, type ButtonIconName } from '../Button/ButtonIcons';
 
 export type ChipVariant = 'filled' | 'outlined';
 export type ChipColor = 'primary' | 'secondary' | 'danger' | 'warning' | 'success';
@@ -19,6 +20,18 @@ export interface ChipProps extends Omit<HTMLAttributes<HTMLElement>, 'onClick'> 
   children?: ReactNode;
   /** Border-radius preset — default is full (pill) */
   rounded?: Rounded;
+  /** Icon rendered before the label — ReactNode or icon name */
+  iconLeft?: ButtonIconName | ReactNode;
+  /** Icon rendered after the label — ReactNode or icon name */
+  iconRight?: ButtonIconName | ReactNode;
+}
+
+function resolveIcon(icon: ButtonIconName | ReactNode): ReactNode {
+  if (typeof icon === 'string') {
+    const svg = renderButtonIcon(icon);
+    if (svg !== null) return svg;
+  }
+  return icon as ReactNode;
 }
 
 export const Chip: React.FC<ChipProps> = ({
@@ -28,6 +41,8 @@ export const Chip: React.FC<ChipProps> = ({
   onClose,
   onClick,
   rounded,
+  iconLeft,
+  iconRight,
   children,
   className,
   ...props
@@ -49,7 +64,17 @@ export const Chip: React.FC<ChipProps> = ({
       onClick={onClick as any}
       {...(props as any)}
     >
+      {iconLeft && (
+        <span className="dsg-chip__icon" aria-hidden="true">
+          {resolveIcon(iconLeft)}
+        </span>
+      )}
       {children}
+      {iconRight && (
+        <span className="dsg-chip__icon" aria-hidden="true">
+          {resolveIcon(iconRight)}
+        </span>
+      )}
       {onClose && (
         <button
           type="button"

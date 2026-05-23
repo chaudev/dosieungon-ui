@@ -59,7 +59,7 @@
 .dsg-card__footer {
   padding: 12px 20px;
   border-top: 1px solid var(--dsg-border);
-  background: var(--dsg-surface);
+  background: var(--dsg-bg);
   font-size: 13px;
 }
 

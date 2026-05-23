@@ -40,6 +40,14 @@
   box-shadow: 0 0 0 3px var(--dsg-primary-subtle);
 }
 
+/* Icon */
+.dsg-chip__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-size: 1em;
+}
+
 /* Close button */
 .dsg-chip__close {
   display: inline-flex;
