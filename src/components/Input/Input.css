@@ -81,7 +81,23 @@
   outline: none;
   background: transparent;
   font-family: var(--dsg-font);
-  font-size: 14px;
+  /*
+   * iOS ZOOM PREVENTION — ĐỪng hạ font-size xuống dưới 16px ở đây.
+   *
+   * iOS Safari tự zoom viewport khi input được focus mà font-size < 16px.
+   * Fix: set font-size: 16px (giá trị iOS đọc), dùng zoom để scale xuống
+   * cho đúng kích thước thiết kế.
+   *
+   * Tại sao dùng zoom thay vì transform: scale?
+   * transform: scale không ảnh hưởng layout — element vẫn chiếm chỗ theo
+   * kích thước gốc, sau khi scale sẽ để lại khoảng trống bên trong border
+   * của wrapper. zoom scale cả layout lẫn visual nên không cần bù width/margin.
+   *
+   * Nếu đổi kích thước visual, cập nhật: zoom = target_px / 16
+   * md default: 14 / 16 = 0.875
+   */
+  font-size: 16px;
+  zoom: 0.875; /* visual: 14px */
   color: var(--dsg-text);
   padding: 8px 12px;
   box-sizing: border-box;
@@ -100,7 +116,7 @@
 /* Sizes */
 .dsg-input-root--sm .dsg-input__field {
   padding: 5px 10px;
-  font-size: 13px;
+  zoom: 0.8125; /* visual: 13px  (13 / 16) — font-size giữ 16px, xem comment trên */
 }
 
 .dsg-input-root--sm .dsg-input-wrapper {
@@ -109,7 +125,7 @@
 
 .dsg-input-root--lg .dsg-input__field {
   padding: 10px 14px;
-  font-size: 15px;
+  zoom: 0.9375; /* visual: 15px  (15 / 16) — font-size giữ 16px, xem comment trên */
 }
 
 .dsg-input-root--lg .dsg-input-wrapper {
