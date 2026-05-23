@@ -71,11 +71,11 @@ export const Modal: React.FC<ModalProps> = ({
   useEffect(() => {
     if (!open) return;
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.overflow = 'hidden';
-    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    document.documentElement.style.overflow = 'hidden';
+    document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
     return () => {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.paddingRight = '';
     };
   }, [open]);
 
@@ -108,29 +108,28 @@ export const Modal: React.FC<ModalProps> = ({
         className={cn('dsg-modal', `dsg-modal--${size}`, rounded && `dsg-modal--rounded-${rounded}`, className)}
         role="document"
       >
-        {(title != null || !hideCloseButton) && (
+        {!hideCloseButton && (
+          <button
+            className="dsg-modal__close"
+            onClick={handleClose}
+            aria-label="Close"
+            type="button"
+          >
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path
+                d="M12 4L4 12M4 4L12 12"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        )}
+
+        {title != null && (
           <div className="dsg-modal__header">
-            {title != null && (
-              <h2 className="dsg-modal__title">{title}</h2>
-            )}
-            {!hideCloseButton && (
-              <button
-                className="dsg-modal__close"
-                onClick={handleClose}
-                aria-label="Close"
-                type="button"
-              >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path
-                    d="M12 4L4 12M4 4L12 12"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            )}
+            <h2 className="dsg-modal__title">{title}</h2>
           </div>
         )}
 

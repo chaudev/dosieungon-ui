@@ -3,6 +3,8 @@
   position: fixed;
   inset: 0;
   background: var(--dsg-bg-overlay);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,6 +34,7 @@
   transform: scale(0.95) translateY(8px);
   transition: transform var(--dsg-transition-slow), opacity var(--dsg-transition-slow);
   opacity: 0;
+  position: relative;
 }
 
 .dsg-modal-overlay--visible .dsg-modal {
@@ -53,9 +56,7 @@
 .dsg-modal__header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 20px 24px 0;
-  gap: 12px;
+  padding: 20px 52px 0 24px;
   flex-shrink: 0;
 }
 
@@ -69,23 +70,24 @@
 }
 
 .dsg-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
   border-radius: var(--dsg-radius-sm);
   border: none;
   background: transparent;
   color: var(--dsg-text-muted);
   cursor: pointer;
-  flex-shrink: 0;
   padding: 0;
   transition: background var(--dsg-transition), color var(--dsg-transition);
   box-sizing: border-box;
   font-family: var(--dsg-font);
   outline: none;
-  margin-left: auto;
 }
 
 .dsg-modal__close:hover {
@@ -101,6 +103,7 @@
 .dsg-modal__body {
   padding: 20px 24px;
   overflow-y: auto;
+  overscroll-behavior: contain;
   flex: 1;
   font-size: 14px;
   line-height: 1.6;
