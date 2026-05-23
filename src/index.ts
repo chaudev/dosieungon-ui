@@ -19,7 +19,7 @@ export { Switch } from './components/Switch';
 export { Drawer } from './components/Drawer';
 
 // Types
-export type { ButtonProps, ButtonVariant, ButtonSize } from './components/Button';
+export type { ButtonProps, ButtonVariant, ButtonSize, ButtonIconName } from './components/Button';
 export type { ModalProps, ModalSize } from './components/Modal';
 export type {
   SelectProps,

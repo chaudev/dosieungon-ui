@@ -92,10 +92,20 @@ export function DSNProvider({
   // Track system dark-mode preference
   const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(getSystemTheme);
 
+  // Whether the component has mounted on the client
+  // Used to defer data-dsg-theme on wrapper div, preventing SSR/hydration mismatch
+  const [mounted, setMounted] = useState(false);
+
   // Sync when controlled prop changes
   useEffect(() => {
     if (isControlled && themeProp !== undefined) setThemeState(themeProp);
   }, [isControlled, themeProp]);
+
+  // Mark as mounted and sync system theme on the client
+  useEffect(() => {
+    setMounted(true);
+    setSystemTheme(getSystemTheme());
+  }, []);
 
   // Listen for OS-level dark mode changes
   useEffect(() => {
@@ -126,7 +136,9 @@ export function DSNProvider({
 
   return (
     <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme }}>
-      <div data-dsg-theme={resolvedTheme} style={{ display: 'contents' }}>
+      {/* data-dsg-theme is omitted until mounted to avoid SSR/hydration mismatch.
+          Before mount, dark mode is handled by the CSS media query on :root. */}
+      <div data-dsg-theme={mounted ? resolvedTheme : undefined} style={{ display: 'contents' }}>
         {children}
       </div>
     </ThemeContext.Provider>

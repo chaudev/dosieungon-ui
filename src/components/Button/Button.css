@@ -45,18 +45,21 @@
 
 /* Sizes */
 .dsg-btn--sm {
-  padding: 5px 12px;
+  height: 1.875rem;
+  padding: 0 12px;
   font-size: 12px;
   border-radius: var(--dsg-radius-sm);
 }
 
 .dsg-btn--md {
-  padding: 8px 16px;
+  height: 2.25rem;
+  padding: 0 16px;
   font-size: 14px;
 }
 
 .dsg-btn--lg {
-  padding: 10px 20px;
+  height: 2.5rem;
+  padding: 0 20px;
   font-size: 16px;
   border-radius: var(--dsg-radius-lg);
 }
@@ -183,15 +186,15 @@
 
 /* Icon only */
 .dsg-btn--icon-only {
-  padding: 8px;
+  padding: 0;
   gap: 0;
   aspect-ratio: 1 / 1;
 }
 .dsg-btn--icon-only.dsg-btn--sm {
-  padding: 5px;
+  padding: 0;
 }
 .dsg-btn--icon-only.dsg-btn--lg {
-  padding: 10px;
+  padding: 0;
 }
 
 /* Spinner */
@@ -225,7 +228,6 @@
 .dsg-btn__icon svg {
   width: 1em;
   height: 1em;
-  font-size: 16px;
 }
 
 /* ── Rounded variants (override size default) ── */

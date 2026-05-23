@@ -5,11 +5,20 @@ Read this file fully before making any change to this codebase.
 
 ---
 
+## Monorepo Context
+
+This package lives inside the `dosieungon` bun workspace monorepo.
+The `frontend` package declares `"dosieungon-ui": "workspace:*"` and resolves
+imports directly to this package's `dist/` via a bun symlink — no npm publish
+needed during development. See the root `CLAUDE.md` for the full workspace guide.
+
+---
+
 ## Build & Commands
 
 ```bash
 npm run build   # compile to dist/ (ESM + CJS + types)
-npm run dev     # watch mode
+npm run dev     # watch mode — rebuilds dist/ on every src/ save
 ```
 
 Output: `dist/dosieungon.js` (ESM), `dist/dosieungon.cjs` (CJS), `dist/index.d.ts`.
@@ -356,13 +365,14 @@ Always pass `className` from props as the **last argument** so users can overrid
 ### Button
 ```tsx
 <Button
-  variant="primary"    // 'primary'|'secondary'|'danger'|'warning'|'outline'|'ghost'
+  variant="primary"    // 'primary'|'secondary'|'danger'|'warning'|'ghost'
   size="md"            // 'sm'|'md'|'lg'
+  outline={false}      // transparent background with colored border
   loading={false}
   iconOnly={false}
   leftIcon={<Icon />}
   rightIcon={<Icon />}
-  color="danger"       // for outline variant: 'danger'|'warning'|'secondary'
+  color="danger"       // for outline buttons: 'danger'|'warning'|'secondary'
   // + all native <button> props
 />
 ```
