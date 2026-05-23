@@ -3,6 +3,8 @@
   position: fixed;
   inset: 0;
   background: var(--dsg-bg-overlay);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   z-index: var(--dsg-z-drawer);
   opacity: 0;
   transition: opacity var(--dsg-transition-slow);
@@ -25,6 +27,7 @@
   font-family: var(--dsg-font);
   color: var(--dsg-text);
   transition: transform var(--dsg-transition-slow);
+  isolation: isolate;
 }
 
 /* Placements */
@@ -102,11 +105,9 @@
 .dsg-drawer__header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
+  padding: 16px 52px 16px 20px;
   border-bottom: 1px solid var(--dsg-border);
   flex-shrink: 0;
-  gap: 12px;
 }
 
 .dsg-drawer__title {
@@ -119,11 +120,14 @@
 }
 
 .dsg-drawer__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
   border-radius: var(--dsg-radius-sm);
   border: none;
   background: transparent;
@@ -132,10 +136,9 @@
   padding: 0;
   transition: background var(--dsg-transition), color var(--dsg-transition);
   box-sizing: border-box;
-  flex-shrink: 0;
-  margin-left: auto;
   outline: none;
   font-family: var(--dsg-font);
+  z-index: 1;
 }
 
 .dsg-drawer__close:hover {
@@ -151,6 +154,7 @@
 .dsg-drawer__body {
   flex: 1;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 20px;
   font-size: 14px;
   line-height: 1.6;
