@@ -1,0 +1,158 @@
+/* ── InputNumber ──────────────────────────────────────────────────────────── */
+
+/*
+ * This component reuses .dsg-input-root, .dsg-input-wrapper, .dsg-input__field,
+ * .dsg-input__label, .dsg-input__error-msg, .dsg-input__hint from Input.css.
+ * Only InputNumber-specific styles are declared here.
+ */
+
+/* ── Prefix / Suffix ─────────────────────────────────────────────────────── */
+
+.dsg-input-number__prefix,
+.dsg-input-number__suffix {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  /*
+   * iOS ZOOM PREVENTION — keep font-size at 16px, use zoom to scale visually.
+   * Must match .dsg-input__field so the text baseline aligns.
+   */
+  font-size: 16px;
+  zoom: 0.875; /* visual: 14px */
+  font-family: var(--dsg-font);
+  color: var(--dsg-text-muted);
+  flex-shrink: 0;
+  white-space: nowrap;
+  user-select: none;
+  line-height: 1;
+}
+
+/* Tighten gap between prefix and the field */
+.dsg-input-number-wrapper--has-prefix .dsg-input-number__field {
+  padding-left: 2px;
+}
+.dsg-input-number__prefix {
+  padding-right: 0;
+}
+
+/* Tighten gap between field and suffix */
+.dsg-input-number-wrapper--has-suffix .dsg-input-number__suffix {
+  padding-left: 0;
+}
+.dsg-input-number-wrapper--has-suffix .dsg-input-number__field {
+  padding-right: 2px;
+}
+
+/* ── Spinner controls ────────────────────────────────────────────────────── */
+
+.dsg-input-number__controls {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-self: stretch;
+  border-left: 1.5px solid var(--dsg-border);
+  overflow: hidden;
+  transition: border-color var(--dsg-transition);
+}
+
+/* Match wrapper focus ring color on the divider */
+.dsg-input-wrapper:focus-within .dsg-input-number__controls {
+  border-left-color: var(--dsg-primary);
+}
+
+.dsg-input-root--error .dsg-input-wrapper .dsg-input-number__controls {
+  border-left-color: var(--dsg-danger);
+}
+
+/* ── Spinner buttons ─────────────────────────────────────────────────────── */
+
+.dsg-input-number__btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--dsg-text-muted);
+  padding: 0;
+  outline: none;
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+  line-height: 0;
+}
+
+/* Divider line between up and down buttons */
+.dsg-input-number__btn--down {
+  border-top: 1px solid var(--dsg-border);
+  transition: background var(--dsg-transition), color var(--dsg-transition),
+    border-color var(--dsg-transition);
+}
+
+.dsg-input-wrapper:focus-within .dsg-input-number__btn--down {
+  border-top-color: var(--dsg-primary);
+}
+
+.dsg-input-root--error .dsg-input-wrapper .dsg-input-number__btn--down {
+  border-top-color: var(--dsg-danger);
+}
+
+.dsg-input-number__btn svg {
+  width: 8px;
+  height: 5px;
+  flex-shrink: 0;
+}
+
+.dsg-input-number__btn:not(:disabled):hover {
+  background: var(--dsg-surface);
+  color: var(--dsg-text);
+}
+
+.dsg-input-number__btn:not(:disabled):active {
+  background: var(--dsg-surface-hover);
+}
+
+.dsg-input-number__btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+/* ── Size adjustments ────────────────────────────────────────────────────── */
+
+/* sm — smaller spinner width */
+.dsg-input-root--sm .dsg-input-number__controls {
+  width: 18px;
+}
+.dsg-input-root--sm .dsg-input-number__btn {
+  width: 18px;
+}
+.dsg-input-root--sm .dsg-input-number__btn svg {
+  width: 7px;
+  height: 4px;
+}
+
+.dsg-input-root--sm .dsg-input-number__prefix,
+.dsg-input-root--sm .dsg-input-number__suffix {
+  font-size: 16px;
+  zoom: 0.8125; /* visual: 13px — matches .dsg-input-root--sm .dsg-input__field */
+  padding: 0 8px;
+}
+
+/* lg — larger spinner width */
+.dsg-input-root--lg .dsg-input-number__controls {
+  width: 26px;
+}
+.dsg-input-root--lg .dsg-input-number__btn {
+  width: 26px;
+}
+.dsg-input-root--lg .dsg-input-number__btn svg {
+  width: 9px;
+  height: 6px;
+}
+
+.dsg-input-root--lg .dsg-input-number__prefix,
+.dsg-input-root--lg .dsg-input-number__suffix {
+  font-size: 16px;
+  zoom: 0.9375; /* visual: 15px — matches .dsg-input-root--lg .dsg-input__field */
+  padding: 0 12px;
+}
