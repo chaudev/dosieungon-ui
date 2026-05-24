@@ -17,6 +17,8 @@ export interface DrawerProps {
   hideCloseButton?: boolean;
   closeOnBackdrop?: boolean;
   closeOnEscape?: boolean;
+  /** Add panel edge, header, and footer borders */
+  bordered?: boolean;
   /** Border-radius preset for the drawer panel */
   rounded?: Rounded;
   className?: string;
@@ -35,6 +37,7 @@ export const Drawer: React.FC<DrawerProps> = ({
   hideCloseButton = false,
   closeOnBackdrop = true,
   closeOnEscape = true,
+  bordered = false,
   className,
   bodyClassName,
   footer,
@@ -97,6 +100,7 @@ export const Drawer: React.FC<DrawerProps> = ({
           `dsg-drawer--${placement}`,
           `dsg-drawer--${size}`,
           visible && 'dsg-drawer--visible',
+          bordered && 'dsg-drawer--bordered',
           rounded && `dsg-drawer--rounded-${rounded}`,
           className
         )}
