@@ -1,8 +1,8 @@
-import React, { ReactNode, useMemo, useState } from 'react';
-import '../../styles/variables.css';
-import './Table.css';
-import { cn } from '../../utils/cn';
-import type { Rounded } from '../../utils/types';
+import React, { ReactNode, useMemo, useState } from "react";
+import "../../styles/variables.css";
+import "./Table.css";
+import { cn } from "../../utils/cn";
+import type { Rounded } from "../../utils/types";
 
 /* ── Types ──────────────────────────────────────────────────── */
 
@@ -18,14 +18,14 @@ export interface TableColumn<T = any> {
   /** Column width — CSS string or pixel number */
   width?: string | number;
   /** Horizontal text alignment */
-  align?: 'left' | 'center' | 'right';
+  align?: "left" | "center" | "right";
   /** Enable click-to-sort on this column */
   sortable?: boolean;
   /** Pin column to left or right edge */
-  fixed?: 'left' | 'right';
+  fixed?: "left" | "right";
 }
 
-export type TableSortDir = 'asc' | 'desc';
+export type TableSortDir = "asc" | "desc";
 
 export interface TablePaginationConfig {
   /** Rows per page (default: 10) */
@@ -58,7 +58,7 @@ export interface TableProps<T = any> {
   /** Highlight rows on hover */
   hoverable?: boolean;
   /** Cell padding preset */
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   /** Content when data is empty */
   empty?: ReactNode;
   /** Caption text below the table */
@@ -96,30 +96,31 @@ export interface TableProps<T = any> {
 
 /* ── Helpers ────────────────────────────────────────────────── */
 
-const SKELETON_WIDTHS = ['long', 'short', 'medium', 'long', 'medium'] as const;
+const SKELETON_WIDTHS = ["long", "short", "medium", "long", "medium"] as const;
 
 function getRowKey<T>(
   row: T,
-  rowKey: TableProps<T>['rowKey'],
-  index: number,
+  rowKey: TableProps<T>["rowKey"],
+  index: number
 ): string | number {
   if (!rowKey) return index;
-  if (typeof rowKey === 'function') return rowKey(row);
+  if (typeof rowKey === "function") return rowKey(row);
   return (row as any)[rowKey as string] ?? index;
 }
 
 function colWidthPx(width?: string | number): number {
   if (width == null) return 0;
-  if (typeof width === 'number') return width;
+  if (typeof width === "number") return width;
   const n = parseInt(width, 10);
   return isNaN(n) ? 0 : n;
 }
 
-function getPaginationRange(current: number, total: number): (number | '…')[] {
+function getPaginationRange(current: number, total: number): (number | "…")[] {
   if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
-  if (current <= 4) return [1, 2, 3, 4, 5, '…', total];
-  if (current >= total - 3) return [1, '…', total - 4, total - 3, total - 2, total - 1, total];
-  return [1, '…', current - 1, current, current + 1, '…', total];
+  if (current <= 4) return [1, 2, 3, 4, 5, "…", total];
+  if (current >= total - 3)
+    return [1, "…", total - 4, total - 3, total - 2, total - 1, total];
+  return [1, "…", current - 1, current, current + 1, "…", total];
 }
 
 /* ── Main component ─────────────────────────────────────────── */
@@ -133,7 +134,7 @@ export function Table<T = any>({
   bordered = false,
   striped = false,
   hoverable = false,
-  size = 'md',
+  size = "md",
   empty,
   caption,
   stickyHeader = false,
@@ -151,18 +152,18 @@ export function Table<T = any>({
 }: TableProps<T>) {
   /* ── Sort state ── */
   const [sortKey, setSortKey] = useState<string | null>(null);
-  const [sortDir, setSortDir] = useState<TableSortDir>('asc');
+  const [sortDir, setSortDir] = useState<TableSortDir>("asc");
 
   /* ── Pagination state ── */
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPageSize, setCurrentPageSize] = useState(
-    pagination?.pageSize ?? 10,
+    pagination?.pageSize ?? 10
   );
 
   /* ── Sort handler ── */
   const handleSort = (key: string) => {
     const nextDir: TableSortDir =
-      sortKey === key && sortDir === 'asc' ? 'desc' : 'asc';
+      sortKey === key && sortDir === "asc" ? "desc" : "asc";
     setSortKey(key);
     setSortDir(nextDir);
     setCurrentPage(1);
@@ -182,10 +183,10 @@ export function Table<T = any>({
       if (av == null) return 1;
       if (bv == null) return -1;
       const cmp =
-        typeof av === 'number' && typeof bv === 'number'
+        typeof av === "number" && typeof bv === "number"
           ? av - bv
           : String(av).localeCompare(String(bv), undefined, { numeric: true });
-      return sortDir === 'asc' ? cmp : -cmp;
+      return sortDir === "asc" ? cmp : -cmp;
     });
   }, [data, sortKey, sortDir, columns]);
 
@@ -228,7 +229,7 @@ export function Table<T = any>({
     let leftOff = 0;
     const leftIdxs: number[] = [];
     columns.forEach((col, i) => {
-      if (col.fixed === 'left') {
+      if (col.fixed === "left") {
         meta[i].leftOffset = leftOff;
         leftOff += colWidthPx(col.width);
         leftIdxs.push(i);
@@ -239,7 +240,7 @@ export function Table<T = any>({
     let rightOff = 0;
     const rightIdxs: number[] = [];
     for (let i = columns.length - 1; i >= 0; i--) {
-      if (columns[i].fixed === 'right') {
+      if (columns[i].fixed === "right") {
         meta[i].rightOffset = rightOff;
         rightOff += colWidthPx(columns[i].width);
         rightIdxs.push(i);
@@ -253,20 +254,19 @@ export function Table<T = any>({
 
   /* ── Dynamic CSS variables for custom colors ── */
   const colorVars = {
-    ...(headerBg && { '--dsg-table-header-bg': headerBg }),
-    ...(headerColor && { '--dsg-table-header-color': headerColor }),
-    ...(bodyBg && { '--dsg-table-body-bg': bodyBg }),
-    ...(bodyColor && { '--dsg-table-body-color': bodyColor }),
-    ...(hoverBg && { '--dsg-table-hover-bg': hoverBg }),
+    ...(headerBg && { "--dsg-table-header-bg": headerBg }),
+    ...(headerColor && { "--dsg-table-header-color": headerColor }),
+    ...(bodyBg && { "--dsg-table-body-bg": bodyBg }),
+    ...(bodyColor && { "--dsg-table-body-color": bodyColor }),
+    ...(hoverBg && { "--dsg-table-hover-bg": hoverBg }),
   } as React.CSSProperties;
 
   /* ── Scroll style ── */
   const scrollStyle: React.CSSProperties =
     scrollY != null
       ? {
-          maxHeight:
-            typeof scrollY === 'number' ? `${scrollY}px` : scrollY,
-          overflowY: 'auto' as const,
+          maxHeight: typeof scrollY === "number" ? `${scrollY}px` : scrollY,
+          overflowY: "auto" as const,
         }
       : {};
 
@@ -274,52 +274,74 @@ export function Table<T = any>({
   const hasFixed = columns.some((c) => c.fixed);
   const enableStickyHeader = stickyHeader || scrollY != null;
 
+  /* ── min-width to prevent browser compressing fixed columns ── */
+  const fixedTableMinWidth = hasFixed
+    ? columns.reduce((acc, col) => acc + colWidthPx(col.width), 0) || undefined
+    : undefined;
+
   /* ── Cell style builder ── */
-  const getCellStyle = (col: TableColumn<T>, ci: number): React.CSSProperties => {
+  const getCellStyle = (
+    col: TableColumn<T>,
+    ci: number
+  ): React.CSSProperties => {
     const fm = fixedMeta[ci];
     return {
       ...(col.width != null
-        ? { width: typeof col.width === 'number' ? `${col.width}px` : col.width }
+        ? {
+            width: typeof col.width === "number" ? `${col.width}px` : col.width,
+          }
         : undefined),
-      ...(col.fixed === 'left' ? { left: fm.leftOffset } : undefined),
-      ...(col.fixed === 'right' ? { right: fm.rightOffset } : undefined),
+      ...(col.fixed === "left" ? { left: fm.leftOffset } : undefined),
+      ...(col.fixed === "right" ? { right: fm.rightOffset } : undefined),
     };
   };
 
   /* ── Fixed cell class builder ── */
-  const getFixedCellClass = (col: TableColumn<T>, ci: number, isHeader: boolean) =>
+  const getFixedCellClass = (
+    col: TableColumn<T>,
+    ci: number,
+    isHeader: boolean
+  ) =>
     cn(
-      col.fixed === 'left' && (isHeader ? 'dsg-table__th--fixed-left' : 'dsg-table__td--fixed-left'),
-      col.fixed === 'right' && (isHeader ? 'dsg-table__th--fixed-right' : 'dsg-table__td--fixed-right'),
-      fixedMeta[ci].isLastLeft && 'dsg-table__cell--last-left',
-      fixedMeta[ci].isFirstRight && 'dsg-table__cell--first-right',
+      col.fixed === "left" &&
+        (isHeader ? "dsg-table__th--fixed-left" : "dsg-table__td--fixed-left"),
+      col.fixed === "right" &&
+        (isHeader
+          ? "dsg-table__th--fixed-right"
+          : "dsg-table__td--fixed-right"),
+      fixedMeta[ci].isLastLeft && "dsg-table__cell--last-left",
+      fixedMeta[ci].isFirstRight && "dsg-table__cell--first-right"
     );
 
   return (
     <div
       className={cn(
-        'dsg-table-wrapper',
-        bordered && 'dsg-table-wrapper--outlined',
+        "dsg-table-wrapper",
+        bordered && "dsg-table-wrapper--outlined",
         rounded && `dsg-table-wrapper--rounded-${rounded}`,
-        className,
+        className
       )}
       style={colorVars}
     >
       {/* ── Scroll container ── */}
       <div
-        className={cn('dsg-table-scroll', hasFixed && 'dsg-table-scroll--fixed')}
+        className={cn(
+          "dsg-table-scroll",
+          hasFixed && "dsg-table-scroll--fixed"
+        )}
         style={scrollStyle}
       >
         <table
           className={cn(
-            'dsg-table',
+            "dsg-table",
             `dsg-table--${size}`,
-            bordered && 'dsg-table--bordered',
-            striped && 'dsg-table--striped',
-            hoverable && 'dsg-table--hoverable',
-            enableStickyHeader && 'dsg-table--sticky',
-            !fullWidth && 'dsg-table--auto',
+            bordered && "dsg-table--bordered",
+            striped && "dsg-table--striped",
+            hoverable && "dsg-table--hoverable",
+            enableStickyHeader && "dsg-table--sticky",
+            !fullWidth && "dsg-table--auto"
           )}
+          style={fixedTableMinWidth ? { minWidth: fixedTableMinWidth, tableLayout: 'fixed' } : undefined}
         >
           {caption && (
             <caption className="dsg-table__caption">{caption}</caption>
@@ -334,18 +356,21 @@ export function Table<T = any>({
                   <th
                     key={col.key}
                     className={cn(
-                      'dsg-table__th',
+                      "dsg-table__th",
                       col.align && `dsg-table__th--${col.align}`,
-                      col.sortable && 'dsg-table__th--sortable',
-                      getFixedCellClass(col, ci, true),
+                      col.sortable && "dsg-table__th--sortable",
+                      col.sortable && "dsg-table__th--sorted",
+                      getFixedCellClass(col, ci, true)
                     )}
                     style={getCellStyle(col, ci)}
-                    onClick={col.sortable ? () => handleSort(col.key) : undefined}
+                    onClick={
+                      col.sortable ? () => handleSort(col.key) : undefined
+                    }
                     aria-sort={
                       col.sortable && isSorted
-                        ? sortDir === 'asc'
-                          ? 'ascending'
-                          : 'descending'
+                        ? sortDir === "asc"
+                          ? "ascending"
+                          : "descending"
                         : undefined
                     }
                   >
@@ -373,20 +398,22 @@ export function Table<T = any>({
                     <td
                       key={col.key}
                       className={cn(
-                        'dsg-table__td',
-                        getFixedCellClass(col, ci, false),
+                        "dsg-table__td",
+                        getFixedCellClass(col, ci, false)
                       )}
                       style={getCellStyle(col, ci)}
                     >
                       <span
                         className={cn(
-                          'dsg-table__skeleton-cell',
+                          "dsg-table__skeleton-cell",
                           `dsg-table__skeleton-cell--${
                             SKELETON_WIDTHS[(ri + ci) % SKELETON_WIDTHS.length]
-                          }`,
+                          }`
                         )}
                         style={{
-                          animationDelay: `${(ri * 0.1 + ci * 0.05).toFixed(2)}s`,
+                          animationDelay: `${(ri * 0.1 + ci * 0.05).toFixed(
+                            2
+                          )}s`,
                         }}
                       />
                     </td>
@@ -398,7 +425,7 @@ export function Table<T = any>({
               <tr>
                 <td colSpan={columns.length} className="dsg-table__td">
                   <div className="dsg-table__empty">
-                    {empty ?? 'Không có dữ liệu'}
+                    {empty ?? "Không có dữ liệu"}
                   </div>
                 </td>
               </tr>
@@ -413,17 +440,17 @@ export function Table<T = any>({
                       <td
                         key={col.key}
                         className={cn(
-                          'dsg-table__td',
+                          "dsg-table__td",
                           col.align && `dsg-table__td--${col.align}`,
-                          getFixedCellClass(col, ci, false),
+                          getFixedCellClass(col, ci, false)
                         )}
                         style={getCellStyle(col, ci)}
                       >
                         {col.render
                           ? col.render(value, row, ri)
                           : value != null
-                            ? value
-                            : '—'}
+                          ? value
+                          : "—"}
                       </td>
                     );
                   })}
@@ -451,19 +478,19 @@ export function Table<T = any>({
   );
 }
 
-Table.displayName = 'Table';
+Table.displayName = "Table";
 
 /* ── Sort icon ──────────────────────────────────────────────── */
 
-function SortIcon({ active }: { active: 'asc' | 'desc' | null }) {
+function SortIcon({ active }: { active: "asc" | "desc" | null }) {
   return (
     <span className="dsg-table__sort-icon" aria-hidden="true">
       <svg viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M5 0L10 6H0L5 0Z"
           className={cn(
-            'dsg-table__sort-arrow',
-            active === 'asc' && 'dsg-table__sort-arrow--active',
+            "dsg-table__sort-arrow",
+            active === "asc" && "dsg-table__sort-arrow--active"
           )}
         />
       </svg>
@@ -471,8 +498,8 @@ function SortIcon({ active }: { active: 'asc' | 'desc' | null }) {
         <path
           d="M5 6L0 0H10L5 6Z"
           className={cn(
-            'dsg-table__sort-arrow',
-            active === 'desc' && 'dsg-table__sort-arrow--active',
+            "dsg-table__sort-arrow",
+            active === "desc" && "dsg-table__sort-arrow--active"
           )}
         />
       </svg>
@@ -504,7 +531,8 @@ function TablePaginator({
   onPageSizeChange,
 }: TablePaginatorProps) {
   const pages = getPaginationRange(currentPage, pageCount);
-  const from = total === 0 ? 0 : Math.min((currentPage - 1) * pageSize + 1, total);
+  const from =
+    total === 0 ? 0 : Math.min((currentPage - 1) * pageSize + 1, total);
   const to = Math.min(currentPage * pageSize, total);
 
   return (
@@ -536,29 +564,34 @@ function TablePaginator({
 
         {/* Page numbers */}
         {pages.map((p, i) =>
-          p === '…' ? (
-            <span key={`ellipsis-${i}`} className="dsg-table-pagination__ellipsis">
+          p === "…" ? (
+            <span
+              key={`ellipsis-${i}`}
+              className="dsg-table-pagination__ellipsis"
+            >
               …
             </span>
           ) : (
             <button
               key={p}
               className={cn(
-                'dsg-table-pagination__btn',
-                p === currentPage && 'dsg-table-pagination__btn--active',
+                "dsg-table-pagination__btn",
+                p === currentPage && "dsg-table-pagination__btn--active"
               )}
               onClick={() => onPageChange(p as number)}
-              aria-current={p === currentPage ? 'page' : undefined}
+              aria-current={p === currentPage ? "page" : undefined}
             >
               {p}
             </button>
-          ),
+          )
         )}
 
         {/* Next */}
         <button
           className="dsg-table-pagination__btn"
-          onClick={() => currentPage < pageCount && onPageChange(currentPage + 1)}
+          onClick={() =>
+            currentPage < pageCount && onPageChange(currentPage + 1)
+          }
           disabled={currentPage >= pageCount}
           aria-label="Next page"
         >

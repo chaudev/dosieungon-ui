@@ -68,6 +68,16 @@
   z-index: 2;
 }
 
+/* Cover the 1px rendering gap that border-collapse: collapse leaves at the
+   very top edge of sticky header cells — pseudo fills it with header bg   */
+.dsg-table--sticky .dsg-table__th::before {
+  content: '';
+  position: absolute;
+  inset: -1px 0 auto 0;
+  height: 1px;
+  background: var(--dsg-table-header-bg, var(--dsg-surface));
+}
+
 /* ── Body ──────────────────────────────────────────────────── */
 
 .dsg-table__td {
@@ -150,7 +160,6 @@
 }
 
 .dsg-table__th--sortable:hover {
-  background: var(--dsg-surface-hover);
   color: var(--dsg-text);
 }
 
@@ -204,10 +213,33 @@
   background: var(--dsg-surface);
 }
 
-/* Hoverable — fixed cells must also change on hover */
+/* Hoverable — fixed cells keep opaque base; tint is layered via ::after
+   so scrolling content behind them stays hidden                        */
 .dsg-table--hoverable tbody tr:hover .dsg-table__td--fixed-left,
 .dsg-table--hoverable tbody tr:hover .dsg-table__td--fixed-right {
+  background: var(--dsg-table-body-bg, var(--dsg-bg));
+}
+
+.dsg-table--striped.dsg-table--hoverable tbody tr:nth-child(even):hover .dsg-table__td--fixed-left,
+.dsg-table--striped.dsg-table--hoverable tbody tr:nth-child(even):hover .dsg-table__td--fixed-right {
+  background: var(--dsg-surface);
+}
+
+.dsg-table--hoverable tbody tr:hover .dsg-table__td--fixed-left::after,
+.dsg-table--hoverable tbody tr:hover .dsg-table__td--fixed-right::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   background: var(--dsg-table-hover-bg, var(--dsg-primary-subtle));
+  pointer-events: none;
+}
+
+/* Border between adjacent fixed-left columns — use box-shadow instead of
+   border-right so the line stays attached to the cell and never creates a
+   1px gap when border-collapse: collapse renders between two sticky cells  */
+.dsg-table__th--fixed-left:not(.dsg-table__cell--last-left),
+.dsg-table__td--fixed-left:not(.dsg-table__cell--last-left) {
+  box-shadow: inset -1px 0 0 var(--dsg-border);
 }
 
 /* Shadow dividers */
