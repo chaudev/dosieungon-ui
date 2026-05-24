@@ -20,6 +20,7 @@ export { Drawer } from './components/Drawer';
 export { DatePicker, DATE_PICKER_LOCALES } from './components/DatePicker';
 export { DateTimePicker, DATE_TIME_PICKER_LOCALES } from './components/DateTimePicker';
 export { TimePicker, TIME_PICKER_LOCALES } from './components/TimePicker';
+export { Breadcrumb } from './components/Breadcrumb';
 
 // Types
 export type { ButtonProps, ButtonVariant, ButtonSize, ButtonIconName } from './components/Button';
@@ -42,3 +43,4 @@ export type { DatePickerProps, DatePickerSize, DatePickerLocale } from './compon
 export type { DateTimePickerProps, DateTimePickerSize, DateTimePickerLocale, TimeMode } from './components/DateTimePicker';
 export type { TimePickerProps, TimePickerSize, TimePickerLocale } from './components/TimePicker';
 export type { TableProps, TableColumn, TableSortDir, TablePaginationConfig } from './components/Table';
+export type { BreadcrumbProps, BreadcrumbItem, BreadcrumbSize } from './components/Breadcrumb';

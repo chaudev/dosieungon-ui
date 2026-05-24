@@ -45,7 +45,8 @@ src/
 │   ├── Radio/
 │   ├── Checkbox/
 │   ├── Switch/
-│   └── Drawer/
+│   ├── Drawer/
+│   └── Breadcrumb/
 ├── styles/
 │   └── variables.css       ← ALL CSS custom properties (design tokens)
 ├── utils/
@@ -530,6 +531,21 @@ Always pass `className` from props as the **last argument** so users can overrid
 >
   content
 </Drawer>
+```
+
+### Breadcrumb
+```tsx
+<Breadcrumb
+  items={[
+    { label: 'Home', href: '/' },          // renders as <a>
+    { label: 'Settings', onClick: fn },    // renders as <button>
+    { label: 'Profile' },                  // last item = current page (<span aria-current="page">)
+  ]}
+  separator="/"     // ReactNode, default "/"
+  size="md"         // 'sm'|'md'|'lg'
+  className=""
+  // + all native <nav> props via forwardRef
+/>
 ```
 
 ---
