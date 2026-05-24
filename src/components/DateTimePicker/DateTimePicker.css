@@ -1,0 +1,601 @@
+/* ── Root ─────────────────────────────────────────────────────────────────── */
+.dsg-dtp {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  font-family: var(--dsg-font);
+}
+
+/* ── Label ───────────────────────────────────────────────────────────────── */
+.dsg-dtp__label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dsg-text);
+  line-height: 1.4;
+}
+
+.dsg-dtp__label--required::after {
+  content: ' *';
+  color: var(--dsg-danger);
+}
+
+/* ── Trigger ─────────────────────────────────────────────────────────────── */
+.dsg-dtp__trigger {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  background: var(--dsg-bg);
+  border: 1.5px solid var(--dsg-border);
+  border-radius: var(--dsg-radius);
+  cursor: pointer;
+  font-family: var(--dsg-font);
+  color: var(--dsg-text);
+  transition:
+    border-color var(--dsg-transition),
+    box-shadow var(--dsg-transition);
+  outline: none;
+  text-align: left;
+  gap: 0;
+}
+
+.dsg-dtp--sm .dsg-dtp__trigger {
+  height: 1.875rem;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.dsg-dtp--md .dsg-dtp__trigger {
+  height: 2.25rem;
+  padding: 0 12px;
+  font-size: 13.5px;
+}
+
+.dsg-dtp--lg .dsg-dtp__trigger {
+  height: 2.75rem;
+  padding: 0 14px;
+  font-size: 15px;
+}
+
+.dsg-dtp__trigger:hover:not(:disabled) {
+  border-color: var(--dsg-primary);
+}
+
+.dsg-dtp--open .dsg-dtp__trigger {
+  border-color: var(--dsg-primary);
+  box-shadow: 0 0 0 3px var(--dsg-primary-subtle);
+}
+
+.dsg-dtp--error .dsg-dtp__trigger {
+  border-color: var(--dsg-danger);
+}
+
+.dsg-dtp--error .dsg-dtp__trigger:hover:not(:disabled),
+.dsg-dtp--error.dsg-dtp--open .dsg-dtp__trigger {
+  border-color: var(--dsg-danger-hover);
+  box-shadow: 0 0 0 3px var(--dsg-danger-subtle);
+}
+
+.dsg-dtp__trigger:disabled {
+  background: var(--dsg-surface);
+  color: var(--dsg-text-disabled);
+  cursor: not-allowed;
+  border-color: var(--dsg-border);
+}
+
+/* Rounded modifiers */
+.dsg-dtp__trigger--rounded-none { border-radius: 0; }
+.dsg-dtp__trigger--rounded-sm   { border-radius: var(--dsg-radius-sm); }
+.dsg-dtp__trigger--rounded-md   { border-radius: var(--dsg-radius); }
+.dsg-dtp__trigger--rounded-lg   { border-radius: var(--dsg-radius-lg); }
+.dsg-dtp__trigger--rounded-full { border-radius: var(--dsg-radius-full); }
+
+/* ── Trigger inner ───────────────────────────────────────────────────────── */
+.dsg-dtp__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dsg-dtp__text        { color: var(--dsg-text); }
+.dsg-dtp__placeholder { color: var(--dsg-text-muted); }
+
+.dsg-dtp__suffix {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.dsg-dtp__cal-icon {
+  display: inline-flex;
+  color: var(--dsg-text-muted);
+  transition: color var(--dsg-transition);
+}
+
+.dsg-dtp--open .dsg-dtp__cal-icon,
+.dsg-dtp__trigger:hover:not(:disabled) .dsg-dtp__cal-icon {
+  color: var(--dsg-primary);
+}
+
+.dsg-dtp__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--dsg-radius-full);
+  color: var(--dsg-text-muted);
+  cursor: pointer;
+  transition: color var(--dsg-transition), background var(--dsg-transition);
+}
+
+.dsg-dtp__clear:hover {
+  color: var(--dsg-text);
+  background: var(--dsg-surface-hover);
+}
+
+/* ── Panel ───────────────────────────────────────────────────────────────── */
+.dsg-dtp__panel {
+  /* position: fixed — set via inline style from JS */
+  z-index: var(--dsg-z-dropdown);
+  min-width: 300px;
+  background: var(--dsg-bg);
+  border: 1.5px solid var(--dsg-border);
+  border-radius: var(--dsg-radius-lg);
+  box-shadow: var(--dsg-shadow-lg);
+  padding: 12px;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--dsg-transition),
+    visibility var(--dsg-transition),
+    transform var(--dsg-transition);
+}
+
+.dsg-dtp__panel--below {
+  transform: translateY(-6px) scaleY(0.97);
+  transform-origin: top center;
+}
+
+.dsg-dtp__panel--above {
+  transform: translateY(6px) scaleY(0.97);
+  transform-origin: bottom center;
+}
+
+.dsg-dtp__panel--open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scaleY(1);
+}
+
+/* ── Panel header ────────────────────────────────────────────────────────── */
+.dsg-dtp__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.dsg-dtp__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: var(--dsg-radius-sm);
+  color: var(--dsg-text-secondary);
+  cursor: pointer;
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+}
+
+.dsg-dtp__nav:hover {
+  background: var(--dsg-surface);
+  color: var(--dsg-primary);
+}
+
+.dsg-dtp__header-title {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  justify-content: center;
+}
+
+.dsg-dtp__header-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 6px;
+  border: none;
+  background: transparent;
+  border-radius: var(--dsg-radius-sm);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--dsg-text);
+  cursor: pointer;
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+  font-family: var(--dsg-font);
+}
+
+.dsg-dtp__header-btn:hover {
+  background: var(--dsg-surface);
+  color: var(--dsg-primary);
+}
+
+.dsg-dtp__header-range {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--dsg-text);
+}
+
+/* ── Weekday row ─────────────────────────────────────────────────────────── */
+.dsg-dtp__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 2px;
+}
+
+.dsg-dtp__weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--dsg-text-muted);
+  letter-spacing: 0.03em;
+}
+
+/* ── Day cells ───────────────────────────────────────────────────────────── */
+.dsg-dtp__cells {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+
+.dsg-dtp__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: var(--dsg-radius-sm);
+  font-size: 13px;
+  font-family: var(--dsg-font);
+  color: var(--dsg-text);
+  cursor: pointer;
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+  position: relative;
+  line-height: 1;
+}
+
+.dsg-dtp__cell:hover:not(:disabled) {
+  background: var(--dsg-primary-subtle);
+  color: var(--dsg-primary);
+}
+
+.dsg-dtp__cell--other-month { color: var(--dsg-text-disabled); }
+
+.dsg-dtp__cell--other-month:hover:not(:disabled) { color: var(--dsg-text-muted); }
+
+.dsg-dtp__cell--today {
+  color: var(--dsg-primary);
+  font-weight: 600;
+}
+
+.dsg-dtp__cell--today::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: var(--dsg-radius-full);
+  background: currentColor;
+}
+
+.dsg-dtp__cell--selected {
+  background: var(--dsg-primary);
+  color: var(--dsg-text-on-primary);
+  font-weight: 600;
+}
+
+.dsg-dtp__cell--selected:hover {
+  background: var(--dsg-primary-hover);
+  color: var(--dsg-text-on-primary);
+}
+
+.dsg-dtp__cell--selected.dsg-dtp__cell--today::after {
+  background: var(--dsg-text-on-primary);
+}
+
+.dsg-dtp__cell--disabled {
+  color: var(--dsg-text-disabled);
+  cursor: not-allowed;
+  background: transparent !important;
+}
+
+/* ── Month picker ────────────────────────────────────────────────────────── */
+.dsg-dtp__months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px 0 2px;
+}
+
+.dsg-dtp__month-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  border: none;
+  background: transparent;
+  border-radius: var(--dsg-radius-sm);
+  font-size: 13px;
+  font-family: var(--dsg-font);
+  color: var(--dsg-text);
+  cursor: pointer;
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+}
+
+.dsg-dtp__month-cell:hover        { background: var(--dsg-primary-subtle); color: var(--dsg-primary); }
+.dsg-dtp__month-cell--current     { color: var(--dsg-primary); font-weight: 600; }
+.dsg-dtp__month-cell--selected    { background: var(--dsg-primary); color: var(--dsg-text-on-primary); font-weight: 600; }
+.dsg-dtp__month-cell--selected:hover { background: var(--dsg-primary-hover); color: var(--dsg-text-on-primary); }
+
+/* ── Year picker ─────────────────────────────────────────────────────────── */
+.dsg-dtp__years {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px 0 2px;
+}
+
+.dsg-dtp__year-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  border: none;
+  background: transparent;
+  border-radius: var(--dsg-radius-sm);
+  font-size: 13px;
+  font-family: var(--dsg-font);
+  color: var(--dsg-text);
+  cursor: pointer;
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+}
+
+.dsg-dtp__year-cell:hover        { background: var(--dsg-primary-subtle); color: var(--dsg-primary); }
+.dsg-dtp__year-cell--current     { color: var(--dsg-primary); font-weight: 600; }
+.dsg-dtp__year-cell--selected    { background: var(--dsg-primary); color: var(--dsg-text-on-primary); font-weight: 600; }
+.dsg-dtp__year-cell--selected:hover { background: var(--dsg-primary-hover); color: var(--dsg-text-on-primary); }
+
+/* ── Body (calendar + time side by side) ────────────────────────────────── */
+.dsg-dtp__body {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.dsg-dtp__calendar-section {
+  flex: 1;
+  min-width: 0;
+}
+
+.dsg-dtp__divider {
+  width: 1px;
+  background: var(--dsg-border);
+  flex-shrink: 0;
+  margin: 0 8px;
+  align-self: stretch;
+}
+
+/* ── Time section (right column) ─────────────────────────────────────────── */
+.dsg-dtp__time-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 4px 0;
+}
+
+.dsg-dtp__time-body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+/* Highlight bar centered on the selected item */
+.dsg-dtp__time-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 30px; /* = ITEM_H */
+  background: var(--dsg-surface);
+  border-radius: var(--dsg-radius-sm);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Column wrapper — provides fade overlays */
+.dsg-dtp__time-col-wrap {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.dsg-dtp__time-col-wrap::before,
+.dsg-dtp__time-col-wrap::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 55px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.dsg-dtp__time-col-wrap::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--dsg-bg) 30%, transparent 100%);
+}
+
+.dsg-dtp__time-col-wrap::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--dsg-bg) 30%, transparent 100%);
+}
+
+/* Scrollable drum column */
+.dsg-dtp__time-col {
+  width: 52px;
+  height: 150px; /* VISIBLE(5) × ITEM_H(30) */
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.dsg-dtp__time-col::-webkit-scrollbar { display: none; }
+
+/* Time item button */
+.dsg-dtp__time-item {
+  flex-shrink: 0;
+  height: 30px; /* ITEM_H */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  font-family: var(--dsg-font-mono);
+  font-size: 13px;
+  color: var(--dsg-text-muted);
+  cursor: pointer;
+  scroll-snap-align: center;
+  transition: color var(--dsg-transition);
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding: 0;
+}
+
+.dsg-dtp__time-item:hover {
+  color: var(--dsg-primary);
+}
+
+.dsg-dtp__time-item--selected {
+  color: var(--dsg-text);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* Colon separator between columns */
+.dsg-dtp__time-sep {
+  position: relative;
+  z-index: 1;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--dsg-font-mono);
+  color: var(--dsg-text-secondary);
+  padding: 0 2px;
+  user-select: none;
+  line-height: 30px;
+  align-self: center;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+.dsg-dtp__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--dsg-border);
+  gap: 8px;
+}
+
+.dsg-dtp__now-btn {
+  border: none;
+  background: transparent;
+  color: var(--dsg-primary);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--dsg-font);
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: var(--dsg-radius-sm);
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+}
+
+.dsg-dtp__now-btn:hover {
+  background: var(--dsg-primary-subtle);
+}
+
+.dsg-dtp__ok-btn {
+  border: none;
+  background: var(--dsg-primary);
+  color: var(--dsg-text-on-primary);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--dsg-font);
+  cursor: pointer;
+  padding: 4px 20px;
+  border-radius: var(--dsg-radius-sm);
+  transition: background var(--dsg-transition);
+}
+
+.dsg-dtp__ok-btn:hover:not(:disabled) {
+  background: var(--dsg-primary-hover);
+}
+
+.dsg-dtp__ok-btn--disabled,
+.dsg-dtp__ok-btn:disabled {
+  background: var(--dsg-surface);
+  color: var(--dsg-text-disabled);
+  cursor: not-allowed;
+}
+
+/* ── Hint / error ────────────────────────────────────────────────────────── */
+.dsg-dtp__error-msg {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--dsg-danger);
+}
+
+.dsg-dtp__hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--dsg-text-muted);
+}
