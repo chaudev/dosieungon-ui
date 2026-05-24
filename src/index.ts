@@ -21,6 +21,7 @@ export { DatePicker, DATE_PICKER_LOCALES } from './components/DatePicker';
 export { DateTimePicker, DATE_TIME_PICKER_LOCALES } from './components/DateTimePicker';
 export { TimePicker, TIME_PICKER_LOCALES } from './components/TimePicker';
 export { Breadcrumb } from './components/Breadcrumb';
+export { ColorPicker } from './components/ColorPicker';
 
 // Types
 export type { ButtonProps, ButtonVariant, ButtonSize, ButtonIconName } from './components/Button';
@@ -44,3 +45,4 @@ export type { DateTimePickerProps, DateTimePickerSize, DateTimePickerLocale, Tim
 export type { TimePickerProps, TimePickerSize, TimePickerLocale } from './components/TimePicker';
 export type { TableProps, TableColumn, TableSortDir, TablePaginationConfig } from './components/Table';
 export type { BreadcrumbProps, BreadcrumbItem, BreadcrumbSize } from './components/Breadcrumb';
+export type { ColorPickerProps, ColorPickerMode, ColorPickerSize, GradientStop, ColorPickerTriggerState } from './components/ColorPicker';
