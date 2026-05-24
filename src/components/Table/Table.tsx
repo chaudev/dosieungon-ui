@@ -79,6 +79,8 @@ export interface TableProps<T = any> {
   headerColor?: string;
   /** Table body background colour */
   bodyBg?: string;
+  /** Table body text colour */
+  bodyColor?: string;
   /** Row hover background colour */
   hoverBg?: string;
 
@@ -140,6 +142,7 @@ export function Table<T = any>({
   headerBg,
   headerColor,
   bodyBg,
+  bodyColor,
   hoverBg,
   scrollY,
   fullWidth = true,
@@ -253,6 +256,7 @@ export function Table<T = any>({
     ...(headerBg && { '--dsg-table-header-bg': headerBg }),
     ...(headerColor && { '--dsg-table-header-color': headerColor }),
     ...(bodyBg && { '--dsg-table-body-bg': bodyBg }),
+    ...(bodyColor && { '--dsg-table-body-color': bodyColor }),
     ...(hoverBg && { '--dsg-table-hover-bg': hoverBg }),
   } as React.CSSProperties;
 

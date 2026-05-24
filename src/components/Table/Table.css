@@ -76,6 +76,7 @@
   vertical-align: middle;
   font-size: 14px;
   line-height: 1.5;
+  color: var(--dsg-table-body-color, var(--dsg-text));
 }
 
 .dsg-table tbody tr:last-child .dsg-table__td {
