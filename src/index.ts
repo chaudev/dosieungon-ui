@@ -17,6 +17,7 @@ export { Radio, RadioGroup } from './components/Radio';
 export { Checkbox } from './components/Checkbox';
 export { Switch } from './components/Switch';
 export { Drawer } from './components/Drawer';
+export { DatePicker, DATE_PICKER_LOCALES } from './components/DatePicker';
 
 // Types
 export type { ButtonProps, ButtonVariant, ButtonSize, ButtonIconName } from './components/Button';
@@ -35,4 +36,5 @@ export type { RadioProps, RadioGroupProps } from './components/Radio';
 export type { CheckboxProps, CheckboxSize } from './components/Checkbox';
 export type { SwitchProps, SwitchSize } from './components/Switch';
 export type { DrawerProps, DrawerPlacement, DrawerSize } from './components/Drawer';
+export type { DatePickerProps, DatePickerSize, DatePickerLocale } from './components/DatePicker';
 export type { TableProps, TableColumn, TableSortDir, TablePaginationConfig } from './components/Table';

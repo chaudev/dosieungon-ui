@@ -1,0 +1,490 @@
+/* ── Root ─────────────────────────────────────────────────────────────────── */
+.dsg-datepicker {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  font-family: var(--dsg-font);
+}
+
+/* ── Label ───────────────────────────────────────────────────────────────── */
+.dsg-datepicker__label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dsg-text);
+  line-height: 1.4;
+}
+
+.dsg-datepicker__label--required::after {
+  content: ' *';
+  color: var(--dsg-danger);
+}
+
+/* ── Trigger ─────────────────────────────────────────────────────────────── */
+.dsg-datepicker__trigger {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  background: var(--dsg-bg);
+  border: 1.5px solid var(--dsg-border);
+  border-radius: var(--dsg-radius);
+  cursor: pointer;
+  font-family: var(--dsg-font);
+  color: var(--dsg-text);
+  transition:
+    border-color var(--dsg-transition),
+    box-shadow var(--dsg-transition);
+  outline: none;
+  text-align: left;
+  gap: 0;
+}
+
+/* Size — sm */
+.dsg-datepicker--sm .dsg-datepicker__trigger {
+  height: 1.875rem;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+/* Size — md */
+.dsg-datepicker--md .dsg-datepicker__trigger {
+  height: 2.25rem;
+  padding: 0 12px;
+  font-size: 13.5px;
+}
+
+/* Size — lg */
+.dsg-datepicker--lg .dsg-datepicker__trigger {
+  height: 2.75rem;
+  padding: 0 14px;
+  font-size: 15px;
+}
+
+.dsg-datepicker__trigger:hover:not(:disabled) {
+  border-color: var(--dsg-primary);
+}
+
+.dsg-datepicker--open .dsg-datepicker__trigger {
+  border-color: var(--dsg-primary);
+  box-shadow: 0 0 0 3px var(--dsg-primary-subtle);
+}
+
+.dsg-datepicker--error .dsg-datepicker__trigger {
+  border-color: var(--dsg-danger);
+}
+
+.dsg-datepicker--error .dsg-datepicker__trigger:hover:not(:disabled),
+.dsg-datepicker--error.dsg-datepicker--open .dsg-datepicker__trigger {
+  border-color: var(--dsg-danger-hover);
+  box-shadow: 0 0 0 3px var(--dsg-danger-subtle);
+}
+
+.dsg-datepicker__trigger:disabled {
+  background: var(--dsg-surface);
+  color: var(--dsg-text-disabled);
+  cursor: not-allowed;
+  border-color: var(--dsg-border);
+}
+
+/* Rounded modifiers */
+.dsg-datepicker__trigger--rounded-none { border-radius: 0; }
+.dsg-datepicker__trigger--rounded-sm   { border-radius: var(--dsg-radius-sm); }
+.dsg-datepicker__trigger--rounded-md   { border-radius: var(--dsg-radius); }
+.dsg-datepicker__trigger--rounded-lg   { border-radius: var(--dsg-radius-lg); }
+.dsg-datepicker__trigger--rounded-full { border-radius: var(--dsg-radius-full); }
+
+/* ── Trigger inner ───────────────────────────────────────────────────────── */
+.dsg-datepicker__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dsg-datepicker__text {
+  color: var(--dsg-text);
+}
+
+.dsg-datepicker__placeholder {
+  color: var(--dsg-text-muted);
+}
+
+.dsg-datepicker__suffix {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.dsg-datepicker__cal-icon {
+  display: inline-flex;
+  color: var(--dsg-text-muted);
+  transition: color var(--dsg-transition);
+}
+
+.dsg-datepicker--open .dsg-datepicker__cal-icon,
+.dsg-datepicker__trigger:hover:not(:disabled) .dsg-datepicker__cal-icon {
+  color: var(--dsg-primary);
+}
+
+.dsg-datepicker__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--dsg-radius-full);
+  color: var(--dsg-text-muted);
+  cursor: pointer;
+  transition: color var(--dsg-transition), background var(--dsg-transition);
+}
+
+.dsg-datepicker__clear:hover {
+  color: var(--dsg-text);
+  background: var(--dsg-surface-hover);
+}
+
+/* ── Panel ───────────────────────────────────────────────────────────────── */
+.dsg-datepicker__panel {
+  /* position: fixed — set via inline style from JS */
+  z-index: var(--dsg-z-dropdown);
+  min-width: 284px;
+  background: var(--dsg-bg);
+  border: 1.5px solid var(--dsg-border);
+  border-radius: var(--dsg-radius-lg);
+  box-shadow: var(--dsg-shadow-lg);
+  padding: 12px;
+
+  /* Hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  /* Smooth appear/disappear */
+  transition:
+    opacity var(--dsg-transition),
+    visibility var(--dsg-transition),
+    transform var(--dsg-transition);
+}
+
+.dsg-datepicker__panel--below {
+  transform: translateY(-6px) scaleY(0.97);
+  transform-origin: top center;
+}
+
+.dsg-datepicker__panel--above {
+  transform: translateY(6px) scaleY(0.97);
+  transform-origin: bottom center;
+}
+
+.dsg-datepicker__panel--open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scaleY(1);
+}
+
+/* ── Panel header ────────────────────────────────────────────────────────── */
+.dsg-datepicker__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.dsg-datepicker__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: var(--dsg-radius-sm);
+  color: var(--dsg-text-secondary);
+  cursor: pointer;
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+}
+
+.dsg-datepicker__nav:hover {
+  background: var(--dsg-surface);
+  color: var(--dsg-primary);
+}
+
+.dsg-datepicker__header-title {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  justify-content: center;
+}
+
+.dsg-datepicker__header-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 6px;
+  border: none;
+  background: transparent;
+  border-radius: var(--dsg-radius-sm);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--dsg-text);
+  cursor: pointer;
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+  font-family: var(--dsg-font);
+}
+
+.dsg-datepicker__header-btn:hover {
+  background: var(--dsg-surface);
+  color: var(--dsg-primary);
+}
+
+.dsg-datepicker__header-range {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--dsg-text);
+}
+
+/* ── Weekday row ─────────────────────────────────────────────────────────── */
+.dsg-datepicker__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 2px;
+}
+
+.dsg-datepicker__weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--dsg-text-muted);
+  letter-spacing: 0.03em;
+}
+
+/* ── Day cells ───────────────────────────────────────────────────────────── */
+.dsg-datepicker__cells {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+
+.dsg-datepicker__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: var(--dsg-radius-sm);
+  font-size: 13px;
+  font-family: var(--dsg-font);
+  color: var(--dsg-text);
+  cursor: pointer;
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+  position: relative;
+  line-height: 1;
+}
+
+.dsg-datepicker__cell:hover:not(:disabled) {
+  background: var(--dsg-primary-subtle);
+  color: var(--dsg-primary);
+}
+
+.dsg-datepicker__cell--other-month {
+  color: var(--dsg-text-disabled);
+}
+
+.dsg-datepicker__cell--other-month:hover:not(:disabled) {
+  color: var(--dsg-text-muted);
+}
+
+/* Today indicator */
+.dsg-datepicker__cell--today {
+  color: var(--dsg-primary);
+  font-weight: 600;
+}
+
+.dsg-datepicker__cell--today::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: var(--dsg-radius-full);
+  background: currentColor;
+}
+
+/* Selected cell */
+.dsg-datepicker__cell--selected {
+  background: var(--dsg-primary);
+  color: var(--dsg-text-on-primary);
+  font-weight: 600;
+}
+
+.dsg-datepicker__cell--selected:hover {
+  background: var(--dsg-primary-hover);
+  color: var(--dsg-text-on-primary);
+}
+
+.dsg-datepicker__cell--selected.dsg-datepicker__cell--today::after {
+  background: var(--dsg-text-on-primary);
+}
+
+/* Disabled cell */
+.dsg-datepicker__cell--disabled {
+  color: var(--dsg-text-disabled);
+  cursor: not-allowed;
+  background: transparent !important;
+}
+
+/* ── Month picker ────────────────────────────────────────────────────────── */
+.dsg-datepicker__months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px 0 2px;
+}
+
+.dsg-datepicker__month-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  border: none;
+  background: transparent;
+  border-radius: var(--dsg-radius-sm);
+  font-size: 13px;
+  font-family: var(--dsg-font);
+  color: var(--dsg-text);
+  cursor: pointer;
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+}
+
+.dsg-datepicker__month-cell:hover {
+  background: var(--dsg-primary-subtle);
+  color: var(--dsg-primary);
+}
+
+.dsg-datepicker__month-cell--current {
+  color: var(--dsg-primary);
+  font-weight: 600;
+}
+
+.dsg-datepicker__month-cell--selected {
+  background: var(--dsg-primary);
+  color: var(--dsg-text-on-primary);
+  font-weight: 600;
+}
+
+.dsg-datepicker__month-cell--selected:hover {
+  background: var(--dsg-primary-hover);
+  color: var(--dsg-text-on-primary);
+}
+
+/* ── Year picker ─────────────────────────────────────────────────────────── */
+.dsg-datepicker__years {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px 0 2px;
+}
+
+.dsg-datepicker__year-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  border: none;
+  background: transparent;
+  border-radius: var(--dsg-radius-sm);
+  font-size: 13px;
+  font-family: var(--dsg-font);
+  color: var(--dsg-text);
+  cursor: pointer;
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+}
+
+.dsg-datepicker__year-cell:hover {
+  background: var(--dsg-primary-subtle);
+  color: var(--dsg-primary);
+}
+
+.dsg-datepicker__year-cell--current {
+  color: var(--dsg-primary);
+  font-weight: 600;
+}
+
+.dsg-datepicker__year-cell--selected {
+  background: var(--dsg-primary);
+  color: var(--dsg-text-on-primary);
+  font-weight: 600;
+}
+
+.dsg-datepicker__year-cell--selected:hover {
+  background: var(--dsg-primary-hover);
+  color: var(--dsg-text-on-primary);
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+.dsg-datepicker__footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--dsg-border);
+}
+
+.dsg-datepicker__today-btn {
+  border: none;
+  background: transparent;
+  color: var(--dsg-primary);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--dsg-font);
+  cursor: pointer;
+  padding: 4px 14px;
+  border-radius: var(--dsg-radius-sm);
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+}
+
+.dsg-datepicker__today-btn:hover:not(:disabled) {
+  background: var(--dsg-primary-subtle);
+}
+
+.dsg-datepicker__today-btn--disabled,
+.dsg-datepicker__today-btn:disabled {
+  color: var(--dsg-text-disabled);
+  cursor: not-allowed;
+}
+
+/* ── Hint / error ────────────────────────────────────────────────────────── */
+.dsg-datepicker__error-msg {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--dsg-danger);
+}
+
+.dsg-datepicker__hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--dsg-text-muted);
+}
