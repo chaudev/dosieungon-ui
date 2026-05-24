@@ -19,6 +19,7 @@ export { Switch } from './components/Switch';
 export { Drawer } from './components/Drawer';
 export { DatePicker, DATE_PICKER_LOCALES } from './components/DatePicker';
 export { DateTimePicker, DATE_TIME_PICKER_LOCALES } from './components/DateTimePicker';
+export { TimePicker, TIME_PICKER_LOCALES } from './components/TimePicker';
 
 // Types
 export type { ButtonProps, ButtonVariant, ButtonSize, ButtonIconName } from './components/Button';
@@ -39,4 +40,5 @@ export type { SwitchProps, SwitchSize } from './components/Switch';
 export type { DrawerProps, DrawerPlacement, DrawerSize } from './components/Drawer';
 export type { DatePickerProps, DatePickerSize, DatePickerLocale } from './components/DatePicker';
 export type { DateTimePickerProps, DateTimePickerSize, DateTimePickerLocale, TimeMode } from './components/DateTimePicker';
+export type { TimePickerProps, TimePickerSize, TimePickerLocale } from './components/TimePicker';
 export type { TableProps, TableColumn, TableSortDir, TablePaginationConfig } from './components/Table';
