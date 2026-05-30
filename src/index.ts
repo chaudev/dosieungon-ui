@@ -23,6 +23,7 @@ export { TimePicker, TIME_PICKER_LOCALES } from './components/TimePicker';
 export { Breadcrumb } from './components/Breadcrumb';
 export { ColorPicker } from './components/ColorPicker';
 export { InputNumber } from './components/InputNumber';
+export { Segmented } from './components/Segmented';
 
 // Types
 export type { ButtonProps, ButtonVariant, ButtonSize, ButtonIconName } from './components/Button';
@@ -48,3 +49,10 @@ export type { TableProps, TableColumn, TableSortDir, TablePaginationConfig } fro
 export type { BreadcrumbProps, BreadcrumbItem, BreadcrumbSize } from './components/Breadcrumb';
 export type { ColorPickerProps, ColorPickerMode, ColorPickerSize, GradientStop, ColorPickerTriggerState } from './components/ColorPicker';
 export type { InputNumberProps, InputNumberSize } from './components/InputNumber';
+export type {
+  SegmentedProps,
+  SegmentedOption,
+  SegmentedRawOption,
+  SegmentedValue,
+  SegmentedSize,
+} from './components/Segmented';

@@ -1,0 +1,156 @@
+/* ── Segmented ─────────────────────────────────────────────────── */
+/* Indicator left + width are set via inline style from DOM        */
+/* measurement (offsetLeft / offsetWidth) — no equal-width trick. */
+
+.dsg-segmented {
+  --_radius-inner: calc(var(--dsg-radius) - 2px);
+
+  display: inline-flex;
+  position: relative;
+  padding: 3px;
+  background: var(--_bg, var(--dsg-surface));
+  border-radius: var(--dsg-radius);
+  font-family: var(--dsg-font);
+  box-sizing: border-box;
+}
+
+.dsg-segmented--block {
+  display: flex;
+  width: 100%;
+}
+
+.dsg-segmented--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Sliding indicator ──────────────────────────────────────────── */
+/* left + width come from JS (offsetLeft / offsetWidth).           */
+
+.dsg-segmented__indicator {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  background: var(--_active-bg, var(--dsg-bg));
+  border-radius: var(--_radius-inner);
+  box-shadow: var(--dsg-shadow-sm);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Transition enabled only after mount to avoid initial-render flash */
+.dsg-segmented__indicator--ready {
+  transition: left var(--dsg-transition), width var(--dsg-transition);
+}
+
+/* ── Segment button ─────────────────────────────────────────────── */
+
+.dsg-segmented__item {
+  position: relative;
+  z-index: 1;
+  /* fit-content — no flex: 1 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 30px;
+  padding: 0 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--_text, var(--dsg-text-muted));
+  border-radius: var(--_radius-inner);
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: color var(--dsg-transition);
+  outline: none;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+/* In block mode each item shares space equally */
+.dsg-segmented--block .dsg-segmented__item {
+  flex: 1;
+}
+
+.dsg-segmented__item:focus-visible {
+  box-shadow: 0 0 0 3px var(--dsg-primary-subtle);
+}
+
+.dsg-segmented__item:not(.dsg-segmented__item--selected):not(.dsg-segmented__item--disabled):hover {
+  color: var(--dsg-text-secondary);
+}
+
+.dsg-segmented__item--selected {
+  color: var(--_active-text, var(--dsg-text));
+}
+
+.dsg-segmented--active-bold .dsg-segmented__item--selected {
+  font-weight: 500;
+}
+
+.dsg-segmented__item--disabled {
+  color: var(--dsg-text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Icon slot ─────────────────────────────────────────────────── */
+
+.dsg-segmented__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0;
+  line-height: 0;
+}
+
+/* ── Sizes ─────────────────────────────────────────────────────── */
+
+.dsg-segmented--sm .dsg-segmented__item {
+  height: 22px;
+  padding: 0 8px;
+  font-size: 12px;
+  gap: 4px;
+}
+
+.dsg-segmented--lg .dsg-segmented__item {
+  height: 38px;
+  padding: 0 12px;
+  font-size: 15px;
+  gap: 6px;
+}
+
+/* ── Rounded variants ──────────────────────────────────────────── */
+
+.dsg-segmented--rounded-none {
+  border-radius: 0;
+  --_radius-inner: 0px;
+}
+
+.dsg-segmented--rounded-sm {
+  border-radius: var(--dsg-radius-sm);
+  --_radius-inner: calc(var(--dsg-radius-sm) - 2px);
+}
+
+.dsg-segmented--rounded-md {
+  border-radius: var(--dsg-radius);
+  --_radius-inner: calc(var(--dsg-radius) - 2px);
+}
+
+.dsg-segmented--rounded-lg {
+  border-radius: var(--dsg-radius-lg);
+  --_radius-inner: calc(var(--dsg-radius-lg) - 2px);
+}
+
+.dsg-segmented--rounded-full {
+  border-radius: var(--dsg-radius-full);
+  --_radius-inner: var(--dsg-radius-full);
+}
