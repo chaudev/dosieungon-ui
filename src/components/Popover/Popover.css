@@ -1,0 +1,194 @@
+/* ===== Popover ===== */
+
+.dsg-popover-trigger {
+  display: inline-block;
+}
+
+/* Overlay (portal, position: fixed) */
+.dsg-popover-overlay {
+  position: fixed;
+  z-index: 1500;
+  min-width: 160px;
+  max-width: 320px;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.12));
+  /* animation defaults */
+  opacity: 0;
+  transition: opacity var(--dsg-transition), transform var(--dsg-transition);
+}
+
+.dsg-popover-overlay--visible {
+  opacity: 1;
+}
+
+/* ---- Slide-in direction per placement ---- */
+
+.dsg-popover-overlay--top,
+.dsg-popover-overlay--topLeft,
+.dsg-popover-overlay--topRight {
+  transform: translateY(4px);
+}
+.dsg-popover-overlay--top.dsg-popover-overlay--visible,
+.dsg-popover-overlay--topLeft.dsg-popover-overlay--visible,
+.dsg-popover-overlay--topRight.dsg-popover-overlay--visible {
+  transform: translateY(0);
+}
+
+.dsg-popover-overlay--bottom,
+.dsg-popover-overlay--bottomLeft,
+.dsg-popover-overlay--bottomRight {
+  transform: translateY(-4px);
+}
+.dsg-popover-overlay--bottom.dsg-popover-overlay--visible,
+.dsg-popover-overlay--bottomLeft.dsg-popover-overlay--visible,
+.dsg-popover-overlay--bottomRight.dsg-popover-overlay--visible {
+  transform: translateY(0);
+}
+
+.dsg-popover-overlay--left,
+.dsg-popover-overlay--leftTop,
+.dsg-popover-overlay--leftBottom {
+  transform: translateX(4px);
+}
+.dsg-popover-overlay--left.dsg-popover-overlay--visible,
+.dsg-popover-overlay--leftTop.dsg-popover-overlay--visible,
+.dsg-popover-overlay--leftBottom.dsg-popover-overlay--visible {
+  transform: translateX(0);
+}
+
+.dsg-popover-overlay--right,
+.dsg-popover-overlay--rightTop,
+.dsg-popover-overlay--rightBottom {
+  transform: translateX(-4px);
+}
+.dsg-popover-overlay--right.dsg-popover-overlay--visible,
+.dsg-popover-overlay--rightTop.dsg-popover-overlay--visible,
+.dsg-popover-overlay--rightBottom.dsg-popover-overlay--visible {
+  transform: translateX(0);
+}
+
+/* ---- Inner card ---- */
+
+.dsg-popover-inner {
+  background: var(--dsg-bg);
+  border-radius: var(--dsg-radius);
+  font-family: var(--dsg-font);
+  overflow: hidden;
+  position: relative;
+  z-index: 1; /* covers the half of the arrow that overlaps the card */
+}
+
+.dsg-popover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dsg-text);
+  line-height: 1.4;
+}
+
+.dsg-popover-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  border-radius: var(--dsg-radius-xs);
+  color: var(--dsg-text-muted);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: background var(--dsg-transition), color var(--dsg-transition);
+}
+
+.dsg-popover-close:hover {
+  background: var(--dsg-surface-hover);
+  color: var(--dsg-text);
+}
+
+.dsg-popover-body {
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--dsg-text-secondary);
+  line-height: 1.55;
+}
+
+/* No header → body top padding slightly larger */
+.dsg-popover-body--no-header {
+  padding-top: 14px;
+}
+
+/* ---- Arrow ---- */
+
+.dsg-popover-arrow {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--dsg-bg);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+/* Top: arrow at bottom edge */
+.dsg-popover-overlay--top .dsg-popover-arrow {
+  bottom: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+.dsg-popover-overlay--topLeft .dsg-popover-arrow {
+  bottom: -4px;
+  left: 16px;
+}
+.dsg-popover-overlay--topRight .dsg-popover-arrow {
+  bottom: -4px;
+  right: 16px;
+}
+
+/* Bottom: arrow at top edge */
+.dsg-popover-overlay--bottom .dsg-popover-arrow {
+  top: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+.dsg-popover-overlay--bottomLeft .dsg-popover-arrow {
+  top: -4px;
+  left: 16px;
+}
+.dsg-popover-overlay--bottomRight .dsg-popover-arrow {
+  top: -4px;
+  right: 16px;
+}
+
+/* Left: arrow at right edge */
+.dsg-popover-overlay--left .dsg-popover-arrow {
+  right: -4px;
+  top: 50%;
+  margin-top: -4px;
+}
+.dsg-popover-overlay--leftTop .dsg-popover-arrow {
+  right: -4px;
+  top: 16px;
+}
+.dsg-popover-overlay--leftBottom .dsg-popover-arrow {
+  right: -4px;
+  bottom: 16px;
+}
+
+/* Right: arrow at left edge */
+.dsg-popover-overlay--right .dsg-popover-arrow {
+  left: -4px;
+  top: 50%;
+  margin-top: -4px;
+}
+.dsg-popover-overlay--rightTop .dsg-popover-arrow {
+  left: -4px;
+  top: 16px;
+}
+.dsg-popover-overlay--rightBottom .dsg-popover-arrow {
+  left: -4px;
+  bottom: 16px;
+}
