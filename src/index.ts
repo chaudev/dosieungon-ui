@@ -24,6 +24,7 @@ export { Breadcrumb } from './components/Breadcrumb';
 export { ColorPicker } from './components/ColorPicker';
 export { InputNumber } from './components/InputNumber';
 export { Segmented } from './components/Segmented';
+export { Tooltip } from './components/Tooltip';
 
 // Types
 export type { ButtonProps, ButtonVariant, ButtonSize, ButtonIconName } from './components/Button';
@@ -56,3 +57,4 @@ export type {
   SegmentedValue,
   SegmentedSize,
 } from './components/Segmented';
+export type { TooltipProps, TooltipPlacement, TooltipTrigger } from './components/Tooltip';

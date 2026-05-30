@@ -1,0 +1,152 @@
+/* ===== Tooltip ===== */
+
+.dsg-tooltip-trigger {
+  display: inline-block;
+}
+
+/* Overlay (portal, position: fixed) */
+.dsg-tooltip-overlay {
+  position: fixed;
+  z-index: 1500;
+  pointer-events: none;
+  max-width: 250px;
+  /* animation defaults */
+  opacity: 0;
+  transition: opacity var(--dsg-transition), transform var(--dsg-transition);
+}
+
+.dsg-tooltip-overlay--visible {
+  opacity: 1;
+}
+
+/* ---- Slide-in direction per placement ---- */
+
+.dsg-tooltip-overlay--top,
+.dsg-tooltip-overlay--topLeft,
+.dsg-tooltip-overlay--topRight {
+  transform: translateY(4px);
+}
+.dsg-tooltip-overlay--top.dsg-tooltip-overlay--visible,
+.dsg-tooltip-overlay--topLeft.dsg-tooltip-overlay--visible,
+.dsg-tooltip-overlay--topRight.dsg-tooltip-overlay--visible {
+  transform: translateY(0);
+}
+
+.dsg-tooltip-overlay--bottom,
+.dsg-tooltip-overlay--bottomLeft,
+.dsg-tooltip-overlay--bottomRight {
+  transform: translateY(-4px);
+}
+.dsg-tooltip-overlay--bottom.dsg-tooltip-overlay--visible,
+.dsg-tooltip-overlay--bottomLeft.dsg-tooltip-overlay--visible,
+.dsg-tooltip-overlay--bottomRight.dsg-tooltip-overlay--visible {
+  transform: translateY(0);
+}
+
+.dsg-tooltip-overlay--left,
+.dsg-tooltip-overlay--leftTop,
+.dsg-tooltip-overlay--leftBottom {
+  transform: translateX(4px);
+}
+.dsg-tooltip-overlay--left.dsg-tooltip-overlay--visible,
+.dsg-tooltip-overlay--leftTop.dsg-tooltip-overlay--visible,
+.dsg-tooltip-overlay--leftBottom.dsg-tooltip-overlay--visible {
+  transform: translateX(0);
+}
+
+.dsg-tooltip-overlay--right,
+.dsg-tooltip-overlay--rightTop,
+.dsg-tooltip-overlay--rightBottom {
+  transform: translateX(-4px);
+}
+.dsg-tooltip-overlay--right.dsg-tooltip-overlay--visible,
+.dsg-tooltip-overlay--rightTop.dsg-tooltip-overlay--visible,
+.dsg-tooltip-overlay--rightBottom.dsg-tooltip-overlay--visible {
+  transform: translateX(0);
+}
+
+/* ---- Inner content box ---- */
+
+.dsg-tooltip-inner {
+  padding: 6px 10px;
+  border-radius: var(--dsg-radius-sm);
+  background: var(--dsg-overlay);
+  color: var(--dsg-bg);
+  font-family: var(--dsg-font);
+  font-size: 13px;
+  line-height: 1.5;
+  word-break: break-word;
+  box-shadow: var(--dsg-shadow-lg);
+}
+
+/* ---- Arrow ---- */
+
+.dsg-tooltip-arrow {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--dsg-overlay);
+  transform: rotate(45deg);
+  pointer-events: none;
+  z-index: -1; /* behind .dsg-tooltip-inner within overlay stacking context */
+}
+
+/* Top: arrow at bottom edge */
+.dsg-tooltip-overlay--top .dsg-tooltip-arrow {
+  bottom: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+.dsg-tooltip-overlay--topLeft .dsg-tooltip-arrow {
+  bottom: -4px;
+  left: 12px;
+}
+.dsg-tooltip-overlay--topRight .dsg-tooltip-arrow {
+  bottom: -4px;
+  right: 12px;
+}
+
+/* Bottom: arrow at top edge */
+.dsg-tooltip-overlay--bottom .dsg-tooltip-arrow {
+  top: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+.dsg-tooltip-overlay--bottomLeft .dsg-tooltip-arrow {
+  top: -4px;
+  left: 12px;
+}
+.dsg-tooltip-overlay--bottomRight .dsg-tooltip-arrow {
+  top: -4px;
+  right: 12px;
+}
+
+/* Left: arrow at right edge */
+.dsg-tooltip-overlay--left .dsg-tooltip-arrow {
+  right: -4px;
+  top: 50%;
+  margin-top: -4px;
+}
+.dsg-tooltip-overlay--leftTop .dsg-tooltip-arrow {
+  right: -4px;
+  top: 12px;
+}
+.dsg-tooltip-overlay--leftBottom .dsg-tooltip-arrow {
+  right: -4px;
+  bottom: 12px;
+}
+
+/* Right: arrow at left edge */
+.dsg-tooltip-overlay--right .dsg-tooltip-arrow {
+  left: -4px;
+  top: 50%;
+  margin-top: -4px;
+}
+.dsg-tooltip-overlay--rightTop .dsg-tooltip-arrow {
+  left: -4px;
+  top: 12px;
+}
+.dsg-tooltip-overlay--rightBottom .dsg-tooltip-arrow {
+  left: -4px;
+  bottom: 12px;
+}
