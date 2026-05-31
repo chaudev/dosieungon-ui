@@ -26,6 +26,7 @@ export { InputNumber } from './components/InputNumber';
 export { Segmented } from './components/Segmented';
 export { Tooltip } from './components/Tooltip';
 export { Popover } from './components/Popover';
+export { Popconfirm } from './components/Popconfirm';
 export { useNotification } from './components/Notification';
 
 // Types
@@ -61,6 +62,7 @@ export type {
 } from './components/Segmented';
 export type { TooltipProps, TooltipPlacement, TooltipTrigger } from './components/Tooltip';
 export type { PopoverProps, PopoverPlacement, PopoverTrigger } from './components/Popover';
+export type { PopconfirmProps, PopconfirmPlacement } from './components/Popconfirm';
 export type {
   NotificationConfig,
   NotificationInstance,

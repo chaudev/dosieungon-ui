@@ -1,0 +1,199 @@
+/* ===== Popconfirm ===== */
+
+.dsg-popconfirm-trigger {
+  display: inline-block;
+}
+
+/* Overlay (portal, position: fixed) */
+.dsg-popconfirm-overlay {
+  position: fixed;
+  z-index: 1500;
+  min-width: 260px;
+  max-width: 360px;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.12));
+  opacity: 0;
+  transition: opacity var(--dsg-transition), transform var(--dsg-transition);
+}
+
+.dsg-popconfirm-overlay--visible {
+  opacity: 1;
+}
+
+/* ---- Slide-in direction per placement ---- */
+
+.dsg-popconfirm-overlay--top,
+.dsg-popconfirm-overlay--topLeft,
+.dsg-popconfirm-overlay--topRight {
+  transform: translateY(4px);
+}
+.dsg-popconfirm-overlay--top.dsg-popconfirm-overlay--visible,
+.dsg-popconfirm-overlay--topLeft.dsg-popconfirm-overlay--visible,
+.dsg-popconfirm-overlay--topRight.dsg-popconfirm-overlay--visible {
+  transform: translateY(0);
+}
+
+.dsg-popconfirm-overlay--bottom,
+.dsg-popconfirm-overlay--bottomLeft,
+.dsg-popconfirm-overlay--bottomRight {
+  transform: translateY(-4px);
+}
+.dsg-popconfirm-overlay--bottom.dsg-popconfirm-overlay--visible,
+.dsg-popconfirm-overlay--bottomLeft.dsg-popconfirm-overlay--visible,
+.dsg-popconfirm-overlay--bottomRight.dsg-popconfirm-overlay--visible {
+  transform: translateY(0);
+}
+
+.dsg-popconfirm-overlay--left,
+.dsg-popconfirm-overlay--leftTop,
+.dsg-popconfirm-overlay--leftBottom {
+  transform: translateX(4px);
+}
+.dsg-popconfirm-overlay--left.dsg-popconfirm-overlay--visible,
+.dsg-popconfirm-overlay--leftTop.dsg-popconfirm-overlay--visible,
+.dsg-popconfirm-overlay--leftBottom.dsg-popconfirm-overlay--visible {
+  transform: translateX(0);
+}
+
+.dsg-popconfirm-overlay--right,
+.dsg-popconfirm-overlay--rightTop,
+.dsg-popconfirm-overlay--rightBottom {
+  transform: translateX(-4px);
+}
+.dsg-popconfirm-overlay--right.dsg-popconfirm-overlay--visible,
+.dsg-popconfirm-overlay--rightTop.dsg-popconfirm-overlay--visible,
+.dsg-popconfirm-overlay--rightBottom.dsg-popconfirm-overlay--visible {
+  transform: translateX(0);
+}
+
+/* ---- Inner card ---- */
+
+.dsg-popconfirm-inner {
+  background: var(--dsg-bg);
+  border-radius: var(--dsg-radius);
+  font-family: var(--dsg-font);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Body (icon + text) ---- */
+
+.dsg-popconfirm-body {
+  display: flex;
+  gap: 10px;
+  padding: 14px 16px 10px;
+}
+
+.dsg-popconfirm-icon-wrap {
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.dsg-popconfirm-icon {
+  width: 15px;
+  height: 15px;
+  color: var(--dsg-warning);
+  display: block;
+}
+
+.dsg-popconfirm-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.dsg-popconfirm-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dsg-text);
+  line-height: 1.4;
+}
+
+.dsg-popconfirm-description {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--dsg-text-secondary);
+  line-height: 1.5;
+}
+
+/* ---- Footer (buttons) ---- */
+
+.dsg-popconfirm-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 12px;
+}
+
+/* ---- Arrow ---- */
+
+.dsg-popconfirm-arrow {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--dsg-bg);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+/* Top: arrow at bottom edge */
+.dsg-popconfirm-overlay--top .dsg-popconfirm-arrow {
+  bottom: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+.dsg-popconfirm-overlay--topLeft .dsg-popconfirm-arrow {
+  bottom: -4px;
+  left: 16px;
+}
+.dsg-popconfirm-overlay--topRight .dsg-popconfirm-arrow {
+  bottom: -4px;
+  right: 16px;
+}
+
+/* Bottom: arrow at top edge */
+.dsg-popconfirm-overlay--bottom .dsg-popconfirm-arrow {
+  top: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+.dsg-popconfirm-overlay--bottomLeft .dsg-popconfirm-arrow {
+  top: -4px;
+  left: 16px;
+}
+.dsg-popconfirm-overlay--bottomRight .dsg-popconfirm-arrow {
+  top: -4px;
+  right: 16px;
+}
+
+/* Left: arrow at right edge */
+.dsg-popconfirm-overlay--left .dsg-popconfirm-arrow {
+  right: -4px;
+  top: 50%;
+  margin-top: -4px;
+}
+.dsg-popconfirm-overlay--leftTop .dsg-popconfirm-arrow {
+  right: -4px;
+  top: 16px;
+}
+.dsg-popconfirm-overlay--leftBottom .dsg-popconfirm-arrow {
+  right: -4px;
+  bottom: 16px;
+}
+
+/* Right: arrow at left edge */
+.dsg-popconfirm-overlay--right .dsg-popconfirm-arrow {
+  left: -4px;
+  top: 50%;
+  margin-top: -4px;
+}
+.dsg-popconfirm-overlay--rightTop .dsg-popconfirm-arrow {
+  left: -4px;
+  top: 16px;
+}
+.dsg-popconfirm-overlay--rightBottom .dsg-popconfirm-arrow {
+  left: -4px;
+  bottom: 16px;
+}
