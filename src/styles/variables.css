@@ -62,6 +62,10 @@
   --dsg-z-dropdown: 1000;
   --dsg-z-modal: 1100;
   --dsg-z-drawer: 1200;
+
+  /* Skeleton */
+  --dsg-skeleton-base: #f0f0f0;
+  --dsg-skeleton-high: #fafafa;
 }
 
 /* ── Dark token set (shared) ──────────────────────────────────── */
@@ -81,6 +85,8 @@
   --_dsg-dark-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
   --_dsg-dark-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.3);
   --_dsg-dark-shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.4);
+  --_dsg-dark-skeleton-base: #2d2d31;
+  --_dsg-dark-skeleton-high: #3f3f46;
 }
 
 /* ── Light token set (explicit reset for system-dark + forced-light) */
@@ -100,6 +106,8 @@
   --_dsg-light-shadow: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.06);
   --_dsg-light-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.05);
   --_dsg-light-shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  --_dsg-light-skeleton-base: #f0f0f0;
+  --_dsg-light-skeleton-high: #fafafa;
 }
 
 /* ── Dark: system preference (fallback when no DSNProvider / no JS) ── */
@@ -120,6 +128,8 @@
     --dsg-shadow: var(--_dsg-dark-shadow);
     --dsg-shadow-lg: var(--_dsg-dark-shadow-lg);
     --dsg-shadow-xl: var(--_dsg-dark-shadow-xl);
+    --dsg-skeleton-base: var(--_dsg-dark-skeleton-base);
+    --dsg-skeleton-high: var(--_dsg-dark-skeleton-high);
   }
 }
 
@@ -140,6 +150,8 @@
   --dsg-shadow: var(--_dsg-dark-shadow);
   --dsg-shadow-lg: var(--_dsg-dark-shadow-lg);
   --dsg-shadow-xl: var(--_dsg-dark-shadow-xl);
+  --dsg-skeleton-base: var(--_dsg-dark-skeleton-base);
+  --dsg-skeleton-high: var(--_dsg-dark-skeleton-high);
 }
 
 /* ── Light: force light even when system prefers dark ── */
@@ -159,4 +171,6 @@
   --dsg-shadow: var(--_dsg-light-shadow);
   --dsg-shadow-lg: var(--_dsg-light-shadow-lg);
   --dsg-shadow-xl: var(--_dsg-light-shadow-xl);
+  --dsg-skeleton-base: var(--_dsg-light-skeleton-base);
+  --dsg-skeleton-high: var(--_dsg-light-skeleton-high);
 }

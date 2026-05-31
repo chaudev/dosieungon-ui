@@ -1,0 +1,245 @@
+/* ── Keyframe ──────────────────────────────────────────────────────────── */
+@keyframes dsg-skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ── Base placeholder shape ────────────────────────────────────────────── */
+.dsg-skeleton__element {
+  display: block;
+  background-color: var(--dsg-skeleton-base);
+}
+
+/* ── Active shimmer — applied to every child element ──────────────────── */
+.dsg-skeleton--active .dsg-skeleton__element {
+  background: linear-gradient(
+    90deg,
+    var(--dsg-skeleton-base) 25%,
+    var(--dsg-skeleton-high) 37%,
+    var(--dsg-skeleton-base) 63%
+  );
+  background-size: 400% 100%;
+  animation: dsg-skeleton-loading 1.4s ease infinite;
+}
+
+/* ── Wrapper ────────────────────────────────────────────────────────────── */
+.dsg-skeleton {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+/* ── Avatar area ────────────────────────────────────────────────────────── */
+.dsg-skeleton__avatar-wrap {
+  flex-shrink: 0;
+}
+
+.dsg-skeleton__avatar {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.dsg-skeleton__avatar--sm {
+  width: 24px;
+  height: 24px;
+}
+
+.dsg-skeleton__avatar--lg {
+  width: 64px;
+  height: 64px;
+}
+
+.dsg-skeleton__avatar--square {
+  border-radius: var(--dsg-radius-sm);
+}
+
+/* ── Content area ───────────────────────────────────────────────────────── */
+.dsg-skeleton__content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Title ──────────────────────────────────────────────────────────────── */
+.dsg-skeleton__title {
+  height: 16px;
+  width: 38%;
+  border-radius: var(--dsg-radius-xs);
+  margin-bottom: 0;
+}
+
+.dsg-skeleton__title--round {
+  border-radius: var(--dsg-radius-full);
+}
+
+.dsg-skeleton__content .dsg-skeleton__title + .dsg-skeleton__paragraph {
+  margin-top: 12px;
+}
+
+/* ── Paragraph ──────────────────────────────────────────────────────────── */
+.dsg-skeleton__paragraph {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dsg-skeleton__paragraph > li {
+  height: 14px;
+  margin-top: 8px;
+  border-radius: var(--dsg-radius-xs);
+}
+
+.dsg-skeleton__paragraph > li:first-child {
+  margin-top: 0;
+}
+
+.dsg-skeleton__paragraph > li:last-child:not(:first-child) {
+  width: 61%;
+}
+
+.dsg-skeleton__paragraph--round > li {
+  border-radius: var(--dsg-radius-full);
+}
+
+/* ── Skeleton.Button ────────────────────────────────────────────────────── */
+.dsg-skeleton-btn {
+  display: inline-block;
+  background-color: var(--dsg-skeleton-base);
+  min-width: 64px;
+  height: 32px;
+  border-radius: var(--dsg-radius-sm);
+  vertical-align: top;
+}
+
+.dsg-skeleton-btn--sm {
+  min-width: 48px;
+  height: 24px;
+}
+
+.dsg-skeleton-btn--lg {
+  min-width: 80px;
+  height: 40px;
+}
+
+.dsg-skeleton-btn--round {
+  border-radius: var(--dsg-radius-full);
+}
+
+.dsg-skeleton-btn--block {
+  width: 100%;
+  display: block;
+}
+
+.dsg-skeleton-btn--active {
+  background: linear-gradient(
+    90deg,
+    var(--dsg-skeleton-base) 25%,
+    var(--dsg-skeleton-high) 37%,
+    var(--dsg-skeleton-base) 63%
+  );
+  background-size: 400% 100%;
+  animation: dsg-skeleton-loading 1.4s ease infinite;
+}
+
+/* ── Skeleton.Avatar ────────────────────────────────────────────────────── */
+.dsg-skeleton-avatar {
+  display: inline-block;
+  background-color: var(--dsg-skeleton-base);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+
+.dsg-skeleton-avatar--sm {
+  width: 24px;
+  height: 24px;
+}
+
+.dsg-skeleton-avatar--lg {
+  width: 64px;
+  height: 64px;
+}
+
+.dsg-skeleton-avatar--square {
+  border-radius: var(--dsg-radius-sm);
+}
+
+.dsg-skeleton-avatar--active {
+  background: linear-gradient(
+    90deg,
+    var(--dsg-skeleton-base) 25%,
+    var(--dsg-skeleton-high) 37%,
+    var(--dsg-skeleton-base) 63%
+  );
+  background-size: 400% 100%;
+  animation: dsg-skeleton-loading 1.4s ease infinite;
+}
+
+/* ── Skeleton.Input ─────────────────────────────────────────────────────── */
+.dsg-skeleton-input {
+  display: inline-block;
+  background-color: var(--dsg-skeleton-base);
+  min-width: 160px;
+  height: 32px;
+  border-radius: var(--dsg-radius-sm);
+  vertical-align: top;
+}
+
+.dsg-skeleton-input--sm {
+  min-width: 120px;
+  height: 24px;
+}
+
+.dsg-skeleton-input--lg {
+  min-width: 200px;
+  height: 40px;
+}
+
+.dsg-skeleton-input--block {
+  width: 100%;
+  display: block;
+}
+
+.dsg-skeleton-input--active {
+  background: linear-gradient(
+    90deg,
+    var(--dsg-skeleton-base) 25%,
+    var(--dsg-skeleton-high) 37%,
+    var(--dsg-skeleton-base) 63%
+  );
+  background-size: 400% 100%;
+  animation: dsg-skeleton-loading 1.4s ease infinite;
+}
+
+/* ── Skeleton.Image ─────────────────────────────────────────────────────── */
+.dsg-skeleton-image {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dsg-skeleton-base);
+  width: 96px;
+  height: 96px;
+  border-radius: var(--dsg-radius);
+  vertical-align: top;
+}
+
+.dsg-skeleton-image__icon {
+  color: var(--dsg-skeleton-high);
+}
+
+.dsg-skeleton-image--active {
+  background: linear-gradient(
+    90deg,
+    var(--dsg-skeleton-base) 25%,
+    var(--dsg-skeleton-high) 37%,
+    var(--dsg-skeleton-base) 63%
+  );
+  background-size: 400% 100%;
+  animation: dsg-skeleton-loading 1.4s ease infinite;
+}

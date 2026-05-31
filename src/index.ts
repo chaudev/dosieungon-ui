@@ -28,6 +28,7 @@ export { Tooltip } from './components/Tooltip';
 export { Popover } from './components/Popover';
 export { Popconfirm } from './components/Popconfirm';
 export { useNotification } from './components/Notification';
+export { Skeleton } from './components/Skeleton';
 
 // Types
 export type { ButtonProps, ButtonVariant, ButtonSize, ButtonIconName } from './components/Button';
@@ -70,3 +71,15 @@ export type {
   NotificationType,
   UseNotificationConfig,
 } from './components/Notification';
+export type {
+  SkeletonProps,
+  SkeletonSize,
+  SkeletonAvatarShape,
+  SkeletonAvatarConfig,
+  SkeletonTitleConfig,
+  SkeletonParagraphConfig,
+  SkeletonButtonProps,
+  SkeletonAvatarProps,
+  SkeletonInputProps,
+  SkeletonImageProps,
+} from './components/Skeleton';
